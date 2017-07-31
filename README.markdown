@@ -1,4 +1,4 @@
-# Spectacle Boilerplate
+# Doug Wade's Slides
 
 ## Reference
 
@@ -6,9 +6,13 @@ The Spectacle core API is available at [https://github.com/FormidableLabs/specta
 
 ## Development
 
-After downloading the boilerplate, your first order of business is to open terminal and run `yarn`. (or `npm install` if you're about that life)
+After downloading the repo, your first order of business is to open terminal and run `npm install` (or `yarn` if you're about that life)
 
-Next, run `rm -R .git` to remove the existing version control.
+Next, to display the presentation you're interested in, update index.js to import the presentation from `/presentation` you're interested in.  For example, to view `modern-client-side-stack`, change the current import to
+
+```js
+import Presentation from "./presentation/modern-client-side-stack";
+```
 
 Then, to start up the local server, run `npm start`
 
