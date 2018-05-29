@@ -68,7 +68,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>What I feel</Heading>
-          <Image src="http://funnystack.com/wp-content/uploads/2014/04/Funny-Soccer-123.jpg" height="50vh" />
+          <Image src="http://i.dailymail.co.uk/i/pix/2012/05/27/article-0-1351D180000005DC-524_468x340.jpg" height="50vh" />
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>What you probably actually mean</Heading>
@@ -97,6 +97,10 @@ export default class Presentation extends React.Component {
             <ListItem>{"It might be easier to..."}</ListItem>
             <ListItem>{"What about..."}</ListItem>
           </List>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>{"This goes the other way too"}</Heading>
+          <Heading size={1} textColor="secondary" fit>{"Don't sell yourself short"}</Heading>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
