@@ -27,8 +27,6 @@ import { theme } from "spectacle-theme-solarized-dark";
 
 // Require CSS
 require("normalize.css");
-require("spectacle/lib/themes/default/index.css");
-
 
 const images = {
   commonjs: require("../assets/common-js.jpg"),
