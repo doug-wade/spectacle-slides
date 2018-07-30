@@ -98,6 +98,18 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={1}>Stage 3</Heading>
+          <Notes>
+            So before we jump right into the proposals, let's acknowledge that there are way more proposals than we can ever
+            get through in an hour, and I haven't tried to rush through them.  My selection criteria was to try to choose the
+            ones that are most likely to affect your life today -- proposals that are easy to understand with only a few minutes
+            introduction, ones that are available in Babel today, and proposals that are stage 2 or 3 and therefore unlikely to
+            go through big changes before they become part of the standard.  This means we'll skip some of the most exciting
+            proposals, like Observable and Temporal, which are likely to fundamentally change the way you write Javascript.  Not
+            all mentioned proposals match all criteria; I'll call them out as we go along.  We'll go stage by stage.
+          </Notes>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={1}>Stage 3</Heading>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
           <Heading size={6}><Code>import()</Code></Heading>
@@ -614,6 +626,7 @@ a ?? (a = b);
         </Slide>
         <Slide>
           <Heading size={1}>Questions?</Heading>
+          <Heading size={6}>Slides at https://github.com/doug-wade/slides</Heading>
         </Slide>
       </Deck>
     );
