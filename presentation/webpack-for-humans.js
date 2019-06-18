@@ -55,12 +55,12 @@ export default class Presentation extends React.Component {
             {"Hi I'm Doug"}
           </Heading>
           <List>
-            <ListItem>Match Team</ListItem>
-            <ListItem>At Indeed about a year and a half</ListItem>
+            <ListItem>Your Team</ListItem>
+            <ListItem>At Indeed about a two and a half years</ListItem>
             <ListItem>I want you to be successful</ListItem>
           </List>
           <Notes>
-            Hi and thanks to Ricky for inviting me. I have geared this talk to an
+            Hi and thanks to Phil for inviting me. I have geared this talk to an
             audience with pretty minimal knowledge of JavaScript, as I have encountered
             a lot of Java-only developers at Indeed; I apologize if I spend too much
             time explaining things everyone already knows. Also, there are a lot of
@@ -85,7 +85,7 @@ export default class Presentation extends React.Component {
         <Slide>
           <Image src={images.searchResults} width="100%"/>
           <Text size={6} textColor="tertiary" italic>
-            373 projects at Indeed use webpack
+            2158 projects at Indeed use webpack
           </Text>
           <Notes>
             <div><ul>
@@ -98,7 +98,7 @@ export default class Presentation extends React.Component {
         <Slide>
           <Image src={images.downloads} width="100%"/>
           <Text size={6} textColor="tertiary" italic>
-            Webpack was downloaded 3.5 million times last week
+            Webpack was downloaded 7.3 million times last week
           </Text>
           <Notes>
             <div><ul>
@@ -112,7 +112,7 @@ export default class Presentation extends React.Component {
           <Image src={images.butWhy} width="100%"/>
           <Notes>
             <div><ul>
-              <li>Hopefully I have convinced you that this is worth knowig about</li>
+              <li>Hopefully I have convinced you that this is worth knowing about</li>
               <li>Why is webpack so successful?</li>
             </ul></div>
           </Notes>
@@ -150,6 +150,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Image src={images.javascript} />
+          <a href="https://www.spacejam.com/archive/spacejam/movie/jam.htm">Space Jam</a>
           <Notes>
             <div>
               And things stayed that way for a long time.  Webmasters used iFrames
@@ -259,7 +260,10 @@ const { myParam } = qa.parse(location.search);
               vary from language to language.  Note in these examples that we can
               switch between TJ's implementation and Sindre's implementation without
               refactoring our code, or we can switch between legacy and Janus styles
-              without a refactor.
+              without a refactor.  JavaScript's love affair for small modules dates
+              back to the days when we copy-pasted from view source (and later from
+              stack overflow) tiny snippets to cobble together to make webpages; 
+              modules formalized this process.
             </Notes>
         </Slide>
         <Slide>
@@ -284,8 +288,8 @@ define(['dep1', 'dep2'], function (dep1, dep2) {
             came back before its dependencies, it was okay.  And the require.js loader
             used the module name and a baseUrl to automatically resolve the dependencies
             for you.  It was magical!  Except you could not use javascript isomorphically,
-            or on the server and in the browser, and you still had the many small files
-            problem.
+            meaning on the server and in the browser, and you still had the many small
+            files problem.
           </Notes>
         </Slide>
         <Slide transition={["zoom"]} bgColor="primary">
@@ -403,6 +407,8 @@ module.exports = {
             Each one adds some functionality, and some plugins expect other plugins to run
             before them, like style-loader expectes css-loader to run first.  It turns out
             that under the cover, Webpack is just a plugin system, like babel and eslint.
+
+            We can see this in an example (styles)
           </Notes>
         </Slide>
         <Slide>
@@ -431,6 +437,8 @@ module.exports = {
             url to something new every time we redeploy the app.  If the static is the same, it computes
             the same hash; if not, the odds of a hash collision are like sand on the beach or stars in the
             sky.
+
+            We can see this in an example (cache-busting)
           </Notes>
         </Slide>
         <Slide>
@@ -471,6 +479,8 @@ module.exports = {
 
             Similarly, you can split out code that is used on more than one page
             into a commons chunk, so that it is not refetched for every page.
+
+            We can see this in an example (vendor-chunk)
           </Notes>
         </Slide>
         <Slide>
@@ -504,6 +514,8 @@ module.exports = {
             are not limited to only injecting process.env.NODE_ENV (which is a node.js
             convention adopted by many js libraries); you can inject any variable
             you want available at build time.
+
+            We can see this in an example (environment)
           </Notes>
         </Slide>
         <Slide>
@@ -534,6 +546,8 @@ module.exports = {
             portion of users, and only then fetch the code, obviating the need for that
             code for most users.  It uses dynamic requires, and does not require any
             extra configuration.
+
+            We can see this in an example (code-split)
           </Notes>
         </Slide>
         <Slide>
@@ -557,12 +571,17 @@ module.exports = {
             careful with.  When you do a dynamic require, webpack loads all of the
             code that you could possibly require and includes it in the bundle, so
             be careful to limit them to as few things as possible.
+
+            We can see this in an example (dynamic-require)
           </Notes>
         </Slide>
         <Slide>
           <Heading size={3} textColor="tertiary">
             frontend-build
           </Heading>
+          <Notes>
+            We can see how frontend-build works in an example (dynamic-require)
+          </Notes>
         </Slide>
         <Slide>
           <Heading size={3} textColor="tertiary">
