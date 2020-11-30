@@ -60,14 +60,14 @@ export default class Presentation extends React.Component {
             {"Hi I'm Doug"}
           </Heading>
           <List>
-            <ListItem>Frontend Engineer on the Match Team</ListItem>
-            <ListItem>At Indeed almost two years</ListItem>
-            <ListItem>I'm about soccer, beer and bikes</ListItem>
+            <ListItem>SDE on Jimmy Eat Curl</ListItem>
+            <ListItem>At Skilljar almost two months</ListItem>
+            <ListItem>I'm about soccer, D&D and beer</ListItem>
           </List>
           <Notes>
-            Hi and thanks to Justin for inviting me.  Note that this talk is targetted at an intermediate Javascript
-            audience, and we likely have some Java-only developers in the audience.  Please don't be shy about asking
-            for clarification on anything that is unclear.
+            Note that while this talk is targetted at an intermediate Javascript audience, and we likely have some 
+	    Python-only developers in the audience.  Please don't be shy about asking for clarification on anything 
+	    that is unclear.
           </Notes>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary">
@@ -91,9 +91,10 @@ export default class Presentation extends React.Component {
           <Image src={images.babel} width="125%"/>
           <Notes>
             One common implementation is to write a Babel plugin, which allows us to use tomorrow's JavaScript today.  I'll
-            try to call out a Babel plugin where one is available, as most teams at Indeed use Babel as part of their build
-            -- it comes standard as part of frontend build, for instance.  There may also be an accompanying polyfill,
-            included as part of babel-polyfill.
+            try to call out a Babel plugin where one is available, since we use Babel as part of our build.  We are a few
+	    minor versions behind, but it shouldn't affect most use cases. There may also be an accompanying polyfill,
+            included as part of babel-polyfill, or in our case, babel-runtime (the difference is babel-runtime pollutes
+	    global scope, unlike babel-polyfill.
           </Notes>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
@@ -111,56 +112,88 @@ export default class Presentation extends React.Component {
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={1}>Stage 3</Heading>
         </Slide>
+	<Slide bgColor="tertiary" textColor="primary">
+	  <Heading size={6}><Code>Field Declarations</Code></Heading>
+	  <CodePane lang="javascript" source={`
+class Counter {
+	x = 0
+	increment { this.x += 1 }
+}
+const c = new Counter()
+c.intcrement()
+console.assert(c.x === 1) // Pass
+`}
+	  <Notes>
+	    First up is field declarations. Previously you had to set values in a constructor. Now, you can declare class fields
+	    anywhere in the class definitions. Neat!
+	  </Notes>
+	</Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={6}><Code>import()</Code></Heading>
+          <Heading size={6}><Code>Private Fields</Code></Heading>
           <CodePane lang="javascript" source={`
-import('lodash').then(_ => {
-  _ = _.default
-  const element = document.getElementById('mount')
-  element.innerText = _.join('Hello', 'dynamic', 'imports', ' ')
-})
-          `}>
+class Counter {
+	#xValue = 0
+	get x() { return #xValue }
+	increment { this.#xValue += 1 }
+	#reset() { xValue = 0 }
+	// ...
+}
+const c = new Counter()
+c.increment()
+console.assert(c.x === 1)
+x.#xValue = 3 // syntax error
+	  `}>
           </CodePane>
           <Notes>
-            First is dynamic imports.  Note the parens after import; without the parens you get a static import, where you need
-            to know what you're importing at build time.  Dynamic imports return a promise that resolves to the module you're
-            importing, in this case lodash (we use async/await to get the value from the promise).
+	    Next up is private fields. Unlike Python where all fields are public and private fields are by convention
+	    are indicated by leading underscore or underscores, modern JavaScript has private fields. Note the leading
+	    hashbang that indicates a private field or method. You also need to declare the private field before using
+	    it in a method.
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={6}><Code>import()</Code></Heading>
+          <Heading size={6}><Code>Class Static Methods</Code></Heading>
           <CodePane lang="javascript" source={`
-(async () => {
-  const _ = await import('lodash')
-  const element = document.getElementById('mount')
-  element.innerText = _.join('Hello', 'dynamic', 'imports', ' ')
-})()
-          `}>
+class ColorFinder {
+  static #green = "#00ff00";
+  static #blue = "#0000ff";
+  
+  static colorName(name) {
+    switch (name) {
+      case "blue": return ColorFinder.#blue;
+      case "green": return ColorFinder.#green;
+      default: throw new RangeError("unknown color");
+    }
+  }
+}
+console.assert(ColorFinder.colorName("blue"), "#0000ff") // Pass
+	  `}>
           </CodePane>
           <Notes>
-            We can use async/await to get the value from the promise and clean up the code.
+	    This pattern is not strictly required in a functional language like JavaScript, where functions are first-class
+	    citizens and can be imported and passed as arguments, but this better meets programmer expectations. Note that
+	    class static methods can also be private.
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={6}><Code>import()</Code></Heading>
+          <Heading size={6}><Code>at()</Code></Heading>
           <CodePane lang="javascript" source={`
-Promise.all([
-    import('@indeed/frontend-logging/modules/navigationTiming'),
-    import('@indeed/frontend-logging/modules/event'),
-    import('@indeed/frontend-logging/transports/html')
-]).then(([ { NavigationTimingModule }, { EventModule }, { HTMLTransport } ]) => {
-    logger.setModules([ EventModule, NavigationTimingModule ])
-    logger.setTransport(HTMLTransport)
-})
-          `}>
+const l = [1, 2, 3, 4]
+console.assert(l[-2] === 3)
+	  `}>
           </CodePane>
           <Notes>
-            Here's another example you might use today, using Indeed's frontend logger.  Note that we use Promise.all to
-            load all three logging modules in parallel, as each dynamic import returns a promise.  Using dynamic imports
-            today in webpack creates a split point, where an extra bundle is created at build time and requested in the browser
-            only when the dynamic import is encountered.  This allows you to reduce the amount of javascript that is loaded on
-            initial page load, and remove some code altogether (for instance, when used in a Proctor test)
+	    This is a method that will be familiar to Python developers. Note that you still can't index directly into the 
+	    iterable. This is because every iterable is an instance of object, which can have arbitrary indices that based
+	    on dynamic names. `[1,2,3][1]` returns 1 because it is at the property index 1.
           </Notes>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={1}>Stage 2</Heading>
+          <Notes>
+            The next set of proposals are stage 2. These are more speculative, but still stable enough that you should
+	    feel comfortable using them in production code.
+	  </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
           <Heading size={6}><Code>BigInt</Code></Heading>
