@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import Redbox from "redbox-react";
 
-import Presentation from "./presentation/webpack-for-humans";
+import Presentation from "./presentation/javascript-the-future-parts";
 
 const CustomErrorReporter = ({ error }) => <Redbox error={ error } />;
 

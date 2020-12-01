@@ -61,8 +61,8 @@ export default class Presentation extends React.Component {
           </Heading>
           <List>
             <ListItem>SDE on Jimmy Eat Curl</ListItem>
-            <ListItem>At Skilljar almost two months</ListItem>
-            <ListItem>I'm about soccer, D&D and beer</ListItem>
+            <ListItem>At Skilljar just over a month</ListItem>
+            <ListItem>I'm about soccer, D&D and bicycles</ListItem>
           </List>
           <Notes>
             Note that while this talk is targetted at an intermediate Javascript audience, and we likely have some 
@@ -105,12 +105,9 @@ export default class Presentation extends React.Component {
             ones that are most likely to affect your life today -- proposals that are easy to understand with only a few minutes
             introduction, ones that are available in Babel today, and proposals that are stage 2 or 3 and therefore unlikely to
             go through big changes before they become part of the standard.  This means we'll skip some of the most exciting
-            proposals, like Observable and Temporal, which are likely to fundamentally change the way you write Javascript.  Not
+            proposals, like the Standard Library, which are likely to fundamentally change the way you write Javascript.  Not
             all mentioned proposals match all criteria; I'll call them out as we go along.  We'll go stage by stage.
           </Notes>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={1}>Stage 3</Heading>
         </Slide>
 	<Slide bgColor="tertiary" textColor="primary">
 	  <Heading size={6}><Code>Field Declarations</Code></Heading>
@@ -122,7 +119,7 @@ class Counter {
 const c = new Counter()
 c.intcrement()
 console.assert(c.x === 1) // Pass
-`}
+`} />
 	  <Notes>
 	    First up is field declarations. Previously you had to set values in a constructor. Now, you can declare class fields
 	    anywhere in the class definitions. Neat!
@@ -196,79 +193,67 @@ console.assert(l[-2] === 3)
 	  </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={6}><Code>BigInt</Code></Heading>
+          <Heading size={6}><Code>throw expressions</Code></Heading>
           <CodePane lang="javascript" source={`
-const myBigNumber = BigInt(Number.MAX_SAFE_INTEGER) * 123n
-// 1107885508333141893n
-
-typeof 123;
-// → 'number'
-typeof 123n;
-// → 'bigint'
+const encoder = encoding === 'utf8' ? new UTF8Encoder : throw new Error()
+function save(filename = throw new TypeError('filename required')
           `}>
           </CodePane>
           <Notes>
-            Next are BigInts.  BigInt is a new, arbitrary precision integer class that we can use to represent really
-            big numbers.  You define a BigInt by using the n character after an integer value, as I do with 123 here, 
-            or use the BigInt constructor, as I do with MAX_SAFE_INTEGER.  Using it with a decimal will yield a 
-            SyntaxError (the constructor throws a RangeError).  Note this is a new type altogether, so typeof === number 
-            will return false.  Babel parses BigInt but doesn't transpile them, so you can't use them yet.
+	    Next are throw expressions. JavaScript has had the throw statement since the beginning, but statements can
+	    only appear in certain parts of the code -- as standalone statement. The difference between statements and
+	    expressions is pretty formal, but you can loosely think of it as an expression can go anywhere a statement
+	    can go, not vice versa. Note, for instance, that we can have an expression as the right-hand side of an
+	    assignment, where an if statement could not go.
           </Notes>
         </Slide>        
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}><Code>Array.prototype.&#123;flat, flatmap&#125;</Code></Heading>
+          <Heading size={4}><Code>New Set methods</Code></Heading>
           <CodePane lang="javascript" source ={`
-[1, [2], [[3]]].flat(2);
-// [1,2,3]
-[{a: 'a', b: [1, 2]}, {a: 'b', b: [3, 4]}].flatMap((x) => x.b)
-// [1, 2, 3, 4]
-          `}>
+Set.prototype.intersection(iterable)
+Set.prototype.union(iterable)
+Set.prototype.difference(iterable)
+Set.prototype.symmetricDifference(iterable)
+Set.prototype.isSubsetOf(iterable)
+Set.prototype.isDisjointFrom(iterable)
+Set.prototype.isSupersetOf(iterable)
+	  `}>
           </CodePane>
           <Notes>
-            These two methods are for working with nested arrays.  Flat takes a single argument -- the depth to flatten to.
-            It defaults to one and in this case, we have to provide two to successfully retrieve the 3 from its doubly-nested
-            position.  Flatmap, on the other hand, always works at a depth of one and can't be deepened.  It's exactly
-            equivalent to a map, followed by a flat with no arguments.  This is included in babel-polyfill and can be used today.
+	    For those of you familiar with Sets, these operations may be familiar. A less familiar one might be
+	    symmetricDifference, which are elements only in A and those only in B.
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Instance Fields</Heading>
+          <Heading size={4}>Temporal</Heading>
           <CodePane lang="javascript" source={`
-class Example {
-  x = 0
-
-  constructor() {
-    this.y = 0 // old style
-  }
-
-  incrementX() {
-    this.x++
-  }
-}
-          `}>
+const now = Temporal.now.instant()
+const beginningOfTime = Temporal.Instant(0n)
+const myBirthday = Temporal.Instant.from('2021-08-24T00:00Z')
+const lAEpoch = new Temporal.ZonedDateTime(0n, 'America/Los_Angeles');
+const duration = new Temporal.Duration({ months: 1, days: 15 })
+	  `}>
           <Notes>
-            One thing that is difficult when working with Javascript is that fields can be declared anywhere -- in a method,
-            in the constructor, even outside of the class.  See, for instance, the y variable here, declared in the 
-            constructor in the old style.  The field listed above it, x, is easier to find, especially for Java programmers,
-            who are used to an enumeration of all fields at the head of the class.
+	    Temporal is a really big proposal, and probably the one I'm most excited about. For years, we've known that
+	    dates are broken in JavaScript, and for a long time the solution was to use moment.js. But moment is pretty
+	    big on the wire, as it has accumulated a lot of features over the years. So we're adding Temporals, which
+	    is an api built directly into the browser that solves a lot of headaches. The api surface on this one is
+	    pretty big, so I encourage you to review it on your own if you're working with js dates. Oh, and all js
+	    Temporals are immutable!
           </Notes>
           </CodePane>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Private Methods and Fields</Heading>
+          <Heading size={4}>Map.prototype.emplace</Heading>
           <CodePane lang="javascript" source={`
-const x = Symbol('x')
-const clicked = Symbol('clicked')
-class ClickCounter extends DomElement {
-  constructor() {
-    this.onclick = this[clicked]
-    this[x] = 0
-  }
-
-  [clicked]() {
-    this[x]++
-  }
+// Instead of
+if (!map.hasKey(key)) { 
+	map.set(key, value); 
 }
+map.get(key).doThing();
+
+// Now we can
+map.emplace(key, { insert: () => value }).doThing()
           `}>
           </CodePane>
           <Notes>
@@ -279,133 +264,48 @@ class ClickCounter extends DomElement {
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Private Methods and Fields</Heading>
+          <Heading size={4}>Tuple and Record</Heading>
           <CodePane lang="javascript" source={`
-class ClickCounter extends DomElement {
-  #x = 0
-  
-  constructor() {
-    this.onclick = this.#clicked
-  }
-
-  #clicked() {
-    this.#x++
-  }
+const proposal = #{
+	id: 1234,
+	title: "Records and Tuples!"
+	keywords: #["ecma", "tc39", "proposal", "record", "tuple"]
 }
+console.log(proposal.id) // 1234
+const proposal2 = #{ ...proposal, "plus": "Doug" }
+Object.keys(proposal) // ["id", "title", "keywords"]
           `}>
           </CodePane>
           <Notes>
-            Just add a octothorpe in front of a class member (field or property), and it will be private (only accessible
-            to this class instance)!  Note the field declaration is different, not in the constructor; this is technically
-            a separate proposal.  These features are implemented in Babel, so you can use it today.
+	    Records and tuples follow a general JavaScript trend towards the safety of immutability. Tuples should be
+	    familiar to the Pythonistas amongst us; records are similar except they have properties instead of order.
+	    Note that they operate the same as objects or arrays, but immutable
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary" >
-          <Heading size={4}>Static Methods and Fields</Heading>
+          <Heading size={4}>Error Causes</Heading>
           <CodePane lang="javascript" source={`
-class MyComponent extends React.Component {
-  render () {
-    return <div>Javascript from the future is {this.props.adjective}!</div>
-  }
+async function doTheNeedful() {
+  return await fetch('www.skilljar.com').catch(e => throw new Error('Upload failed', e)
 }
-MyComponent.propTypes = {
-  adjective: PropTypes.string,
+try {
+  await doTheNeedful()
+} catch (e) {
+  console.log(e) // Error: Upload failed
+  console.log(e.cause) // TypeError: Failed to fetch
 }
-          `}>
+	  `}>
           </CodePane>
           <Notes>
-            You may not have stopped to think about it, but you use static methods and fields all the time.  Anytime you 
-            directly attach a property to a class object, you're defining a static member.  For instance, for all the
-            prop type definitions, you define static class members.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary" >
-          <Heading size={4}>Static Methods and Fields</Heading>
-          <CodePane lang="javascript" source={`
-class MyComponent extends React.Component {
-  render () {
-    return <div>Javascript from the future is {this.props.adjective}!</div>
-  }
-
-  static propTypes = {
-    adjective: PropTypes.string,
-  }
-}
-          `}>
-          </CodePane>
-          <Notes>
-            With the new static class members, you can define static methods and fields inline.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary" >
-          <Heading size={4}>Static Methods and Fields</Heading>
-          <CodePane lang="javascript" source={`
-class ColorFinder {
-  static #red = "#ff0000";
-  static #blue = "#00ff00";
-  static #green = "#0000ff";
-  
-  static colorName(name) {
-    switch (name) {
-      case "red": return ColorFinder.#red;
-      case "blue": return ColorFinder.#blue;
-      case "green": return ColorFinder.#green;
-      default: throw new RangeError("unknown color");
-    }
-  }
-}
-          `}>
-          </CodePane>
-          <Notes>
-            Here's an example with both static methods and fields.  These features are implemented in Babel, so you can use it today.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary" >
-          <Heading size={4}><Code>Object.fromEntries</Code></Heading>
-          <CodePane lang="javascript" source={`
-const objA = Object.fromEntries([['a', 0], ['b', 1]]); 
-// { a: 0, b: 1 }
-
-const map = new Map([ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ] ]);
-const objB = Object.fromEntries(map);
-// { a: 1, b: 2, c: 3 }
-
-const query = Object.fromEntries(new URLSearchParams('foo=bar&baz=qux'));
-// { foo: "bar", baz: "qux" }
-          `}>
-          </CodePane>
-          <Notes>
-            Object fromEntries is a new way to construct objects from arrays of keys followed by values.  This makes it easier to 
-            transform data from other forms, like lists of objects, url params, maps and others.  This is included in babel polyfill
-            and can be used today.
-          </Notes>
-        </Slide>  
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} caps><Code>Stage 2</Code></Heading>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}><Code>Numeric separators</Code></Heading>
-          <CodePane lang="javascript" source={`
-1_000_000_000           // Ah, so a billion
-101_475_938.38          // And this is hundreds of millions
-
-let fee = 123_00;       // $123 (12300 cents, apparently)
-let fee = 12_300;       // $12,300 (woah, that fee!)
-let amount = 12345_00;  // 12,345 (1234500 cents, apparently)
-let amount = 123_4500;  // 123.45 (4-fixed financial)
-let amount = 1_234_500; // 1,234,500
-          `}>
-          </CodePane>
-          <Notes>
-            Numeric separators are purely intended to make it easier to communicate with your team and with yourself in the future.
-            Using numeric separators doesn't have any change in behavior, only in appearance.  I recognize the top use case; the
-            further use cases are from the proposal itself.  There is a Babel plugin for this, so you can use it today. 
+	    Error caused by is as much a proposal about a convention as it is about changing the JavaScript engine.
+	    Currently, we could all set a cause property on our errors, but there is no guarantee that it will be
+	    there. This will formalize how the error call stack and debugging take place.
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
           <Heading size={4}><Code>Decorators</Code></Heading>
           <CodePane lang="javascript" source={`
-class MyComponent extends React.Component {
+class MyComponent {
   @autobind
   #clickHandler() {
     fetch('/my-data').then(this.props.handler)
@@ -413,15 +313,30 @@ class MyComponent extends React.Component {
 
   @time
   render() {
-    return <button onclick={this.#clickHandler}></button>
+    return h('button', { onclick: { this.#clickHandler } })
   }
 }
           `}>
           </CodePane>
+	  <Slide bgColor="tertiary" textColor="primary">
+	    <Heading size={4}>Iterator Helpers and <Code>.range</Code></Heading>
+	    <CodePane language="javascript" source={`
+const odds = Number.range(0, Infinity)
+  .take(1000)
+  .filter((x) => (x % 2))
+  .toArray()
+`}/>
+	  <Notes>
+	    I've combined two proposals here -- the iterator helpers, which adds a lot of fluent methods to iterators like take --
+	    and the Number.range and BigInt.range methods to show that you can lazily evaluate iterables to create pipelines that
+	    work well with async functions and generators.
+	  </Notes>
+	  </Slide>
           <Notes>
-            Decorators are a proposal that has been in progress for some time, and has gone through some changes, but it is stage 2,
-            and it is fairly useful.  The two decorators here are autobind and time, preceded with the @.  Decorators are a way to
-            augment the behavior of classes, methods, functions and fields.
+            Caveat Emptor: those of us who have been following the standards process for a while might cringe a bit by the inclusion
+	    of decorators here. Decorators are a proposal that has been in progress for some time, and has gone through some changes, 
+	    but it is stage 2, and it is fairly useful.  The two decorators here are autobind and time, preceded with the @.  
+            Decorators are a way to augment the behavior of classes, methods, functions and fields through function currying.
           </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
@@ -444,111 +359,12 @@ const time = (wrapped) => {
             method itself, before and after calling the built-in timing methods.
           </Notes>
         </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Throw Expressions</Heading>
-          <CodePane lang="javascript" source={`
-function getEncoder(encoding) {
-  const encoder = encoding === "utf8" ? new UTF8Encoder()
-                : throw new Error("Unsupported encoding");
-}
-class Product {
-  get id() { return this.#id; }
-  set id(value) { this.#id = value || throw new Error("Invalid value"); }
-}
-          `}>
-          </CodePane>
-          <Notes>
-            This one takes a moment to explain, because we need to understand some language theory, specifically the difference between
-            a statement and an expression.  Consider the difference between an if statement and a ternary expression -- both have the
-            same basic if/else structure, but you can assign the result of the ternary expression to a variable, which you can't do for
-            an if statement.  Previously, throw was a statement, like if, and you couldn't throw in some places; now its an expression 
-            and you can.  I've included two such locations; there are many more.  There is a Babel plugin for this, so you can use it
-            today.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>New Set methods</Heading>
-          <CodePane lang="javascript" source={`
-const x = new Set(['a', 'b'])
-const y = new Set(['b', 'c'])
-x.union(y) // Set('a', 'b', 'c')
-x.intersection(y) // Set('b')
-x.difference(y) // Set('a')
-x.symmetricDifference(y) // Set('a', 'c')
-          `}>
-          </CodePane>
-          <Notes>
-            This one is fairly simple; there's a stage 2 proposal to add union, intersection, difference and symmetricDifference to the
-            Set in Javascript. intersection creates new Set instance by set intersection operation; union creates new Set instance by 
-            set union operation; difference creates new Set without elements present in iterable; symmetricDifference returns Set of 
-            elements found only in either this or in iterable.  These methods are added by Babel polyfill, and are available today.
-          </Notes>
-        </Slide>
         <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} caps><Code>Stage 1</Code></Heading>
+          <Heading size={1}>Stage 1</Heading>
           <Notes>
-            Note that stage 1 is entering the realm where I can no longer in good conscience recommend that you use these professionally.
-            At and after stage 2, proposals are much more stable than before stage 2.  I used the decorator proposal with a library
-            called MobX on a side project, and that project is stuck on an older version of Babel for the forseeable future while the
-            decorator plugin and polyfill are rewritten, after which I'll have to wait for the framework to migrate and may have to do
-            some migration myself.  On the other hand, if you want new Javasript features to work like you want and expect, its important
-            to use them early and provide feedback (usually in the form of issues on proposal repositories), which you can only do for
-            proposals that you have tried.  Consider using them in side projects or hackathon projects, or, in careful consultation with
-            your team, in work projects with the understanding that there may be some extra work involved in the long run.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Optional chaining</Heading>
-          <CodePane lang="javascript" source={`
-if(specimen && specimen.arms && specimen.arms.length > 2)
-  console.log("This is probably an octopus");
-
-// This is the same as
-if(specimen?.arms?.length > 2)
-    console.log("This is probably an alien");
-
-// The operator is ?.
-var firstArm = specimen?.arms?.[0]; //CORRECT
-var secondArm = specimen?.arms?[1]; //WRONG
-          `}>
-          </CodePane>
-          <Notes>
-            This is optional chaining, which makes it easy to handle checking for null or undefined in deeply nested objects.  If
-            specimen or arms are undefined, then the whole check will evaluate to undefined.  This means no more "Cannot read 
-            property arms of undefined" when you're programming.  Note that the operator is ?., so there are some strange looking
-            expressions that result, for instance the arm access at ll 9.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Nullish coalescing</Heading>
-          <CodePane lang="javascript" source={`
-specimen?.arms?.length ?? 2
-const headerText = response.settings?.headerText ?? 'Hello, world!'; // '' evaluates to false
-const animationDuration = response.settings?.animationDuration ?? 300; // 0 evaluates to false
-const showSplashScreen = response.settings?.showSplashScreen ?? true; // False evaluates to false
-          `}>
-          </CodePane>
-          <Notes>
-            This is nullish coalescing.  Often, we use || to express alternatives or defaults, but it can have surprising results as there
-            are many falesy values -- false, null, undefined, the empty string, 0.  Nullish coalescing allows you to provide defaults only
-            when a value is not provided.  This is available in Babel today.
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Collections Of and From</Heading>
-          <CodePane lang="javascript" source={`
-const mySet = Set.of(1,2,3)
-const myOtherSet = Set.from([1,2,3])
-const myMap = Map.of(["key", "value"], ["key2", "value2"])
-const myWeakSet = WeakSet.of("a", "b", "c")
-const myWeakMap = WeakMap.from([["key1", "value1"], ["key2", "value2"]])
-          `}>
-          </CodePane>
-          <Notes>
-            These methods, of and from, make constructing collections much easier.  The method of takes a list of arguments and uses that
-            to construct a new collection, either a list of key value pairs for maps, or values for sets.  This is in Babel polyfill, so
-            you can use it today.
-          </Notes>
+            The next set of proposals are stage 1. These are very speculative, and you should not feel comfortable
+	    using them in production code.
+	  </Notes>
         </Slide>
         <Slide bgColor="tertiary" textColor="primary">
           <Heading size={4}><Code>do</Code> expressions</Heading>
@@ -572,84 +388,75 @@ const myResult = do {
             This allows you to return the result of a switch or if statement and assign it to a variable, or return it for a function.
           </Notes>
         </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}><Code>do</Code> expressions</Heading>
-          <CodePane lang="javascript" source={`
-const myComponent () => (
-  <nav>
-    <Home />
-    {
-      do {
-        if (loggedIn) {
-          <LogoutButton />
-        } else {
-          <LoginButton />
-        }
-      }
-    }
-  </nav>
-)
-          `}>
-          </CodePane>
-          <Notes>
-            do expressions are especially awesome in React, where you can render values conditionally.  This is available in Babel today.
-          </Notes>
+	<Slide bgColor="tertiary" textColor="primary">
+	  <Heading size={4}>Slice Notation</Heading>
+	  <CodePane lang="javascript" source={`
+const arr = ['a', 'b', 'c', 'd']
+arr[1:2] // ['b', 'c']
+arr[1:] // ['b', 'c', 'd']
+arr[-2:] // ['c', 'd']
+	  `}>
+	  </CodePane>
+	  <Notes>
+	    This should look pretty familiar. It has the same semantics as the Python equivalent, and as Array.slice.
+	  </Notes>
+	</Slide>
+	<Slide bgColor="tertiary" textColor="primary">
+	  <Heading size={4}>Pattern Matching</Heading>
+	  <CodePane lang="javascript" source={`
+const getLength = vector => case (vector) {
+  when { x, y, z } -> Math.hypot(x, y, z)
+  when { x, y } -> Math.hypot(x, y)
+  when [...etc] -> vector.length
+}
+getLength({ x: 1, y: 2, z: 3 }) // 3.74165
+	`}/>
+	  <Notes>
+	    When I was studying Scala and Standard ML of New Jersey, one of my favorite features was pattern matching. It seemed (and seems) to
+	    me as a more elegant solution to a switch statement, or nested ifs. Note that it uses the same semantics as the existing destructuring
+	    syntax, making it more relatable and easier to use.
+	  </Notes>
         </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}><Code>Array.prototype.lastItem</Code></Heading>
-          <CodePane lang="javascript" source={`
-const lastItem = [1,2,3,4].lastItem // 4
-[1,2,3].lastItem = 5 // [1,2,5]
-[1,2,3].lastIndex // 2
-
-// Previously
-const myArr = [1,2,3,4]
-const lastItem = myArr[myArr.length - 1] // 4
-          `}>
-          </CodePane>
-          <Notes>
-            It gets the last item from an array!  It's really easy! You can't even off by one error!  You can set things and get indices!
-            It's available in Babel today!
-          </Notes>
-        </Slide>
-        <Slide bgColor="tertiary" textColor="primary">
-          <Heading size={4}>Logical assignment</Heading>
-          <CodePane lang="javascript" source={`
-// "Or Or Equals"
-a ||= b;
-a || (a = b);
-
-// "And And Equals"
-a &&= b;
-a && (a = b);
-
-// "QQ Equals"
-a ??= b;
-a ?? (a = b);
-          `}>
-          </CodePane>
-          <Notes>
-            I think the most interesting of these is the or equals, which sets the value of a to b if and only if a is not already defined.
-            We've talked a lot about setting defaults, and this is another way you can do it.
-          </Notes>
-        </Slide>
-        <Slide>
+	<Slide bgColor="tertiary" textColor="primary">
+	  <Heading size={4}>Decimal</Heading>
+	  <CodePane lang="javascript" source={`
+function calculateBill(items, tax) {
+  let total = 0m
+  for (let { price, count } of items) {
+    total += price * BigDecimal(count)
+  }
+  return BigDecimal.round(total * (1m + tax), { maximumFractionDigits: 2, round: "up"});
+	  `}/>
+	  <Notes>
+	    One of the most common errors, and especially when handling money, is the problem of IEEE 754 floating point numbers. The inability of
+	    floating point numbers to represent even whole numbers can lead to costly errors. To resolve this, there is a proposal to add a BigDecimal
+	    built-in that, like BigInt, represents larger numbers precisely.
+	  </Notes>
+	</Slide>
+	<Slide>
+	  <Heading bgColor="tertiary" textColor="primary">Standard Library</Heading>
+	  <CodePane lang="javascript" source={`
+import { dedent } from '@std/strings'
+	  `}/>
+	  <Notes>
+	    One of the biggest complaints about JavaScript is its lack of a standard library. Luckily there is a proposal to add a mechansism for
+	    adding new libraries and methods to the JavaScript standard library without colliding with existing methods and objects. I personally
+	    don't have a lot of hope for this one getting through, since the standards committee has been pushing through changes fairly well
+	    without it, but there is hope.
+	  </Notes>
+	</Slide>
+	<Slide>
         <Heading size={6} textColor="secondary" caps>But wait there's more</Heading>
           <List>
-            <ListItem>Observable</ListItem>
             <ListItem>Regexp changes</ListItem>
-            <ListItem><Code>global</Code></ListItem>
-            <ListItem>Pattern Matching</ListItem>
-            <ListItem><Code>function.sent</Code></ListItem>
-            <ListItem>Top-level <Code>await</Code></ListItem>
-            <ListItem>WeakRefs</ListItem>
+            <ListItem>Top Level <Code>await</Code></ListItem>
+            <ListItem><Code>Atomics.waitAsync</Code></ListItem>
+	    <ListItem>Import Assertions</ListItem>
             <ListItem>Realms</ListItem>
             <ListItem><Code>=>*</Code> Generator arrow functions</ListItem>
             <ListItem><Code>Promise.try</Code></ListItem>
             <ListItem>Error stacks</ListItem>
-            <ListItem>Temporal</ListItem>
-            <ListItem>Pipeline Operator</ListItem>
-            <ListItem>Partial Application</ListItem>
+	    <ListItem><Code>Function.sent</Code></ListItem>
           </List>
           <Notes>
              I wish we had time to talk through 100% of all the proposals that are in flight right now, but realistically we just can't
