@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import Redbox from "redbox-react";
 
-import Presentation from "./presentation/javascript-the-future-parts";
+import Presentation from "./presentation/unit-testing-in-vue";
 
 const CustomErrorReporter = ({ error }) => <Redbox error={ error } />;
 

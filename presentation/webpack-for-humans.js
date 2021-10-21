@@ -42,6 +42,8 @@ const images = {
   searchResults: require("../assets/search-results.png"),
   webpackIcon: require("../assets/webpack-icon.png"),
   webpack: require("../assets/webpack.png"),
+  gruntAndBowerLogos: require('../assets/grunt-and-bower-logo.png'),
+  thatsAllFolks: require('../assets/thats-all-folks.gif'),
 };
 
 preloader(images);
@@ -55,19 +57,18 @@ export default class Presentation extends React.Component {
             {"Hi I'm Doug"}
           </Heading>
           <List>
-            <ListItem>Your Team</ListItem>
-            <ListItem>At Indeed about a two and a half years</ListItem>
-            <ListItem>I want you to be successful</ListItem>
+            <ListItem>Jimmy Eat Curl</ListItem>
+            <ListItem>At Skilljar for about six months</ListItem>
           </List>
           <Notes>
-            Hi and thanks to Phil for inviting me. I have geared this talk to an
+            Hi and thanks for coming to listen. I have geared this talk to an
             audience with pretty minimal knowledge of JavaScript, as I have encountered
-            a lot of Java-only developers at Indeed; I apologize if I spend too much
+            a lot Python devs with not a lot of JS knowledge; I apologize if I spend too much
             time explaining things everyone already knows. Also, there are a lot of
             people who are way better at talking about Webpack than me that have
             Youtube videos out there; the benefit to having me speak rather than
             pressing play on one of them is that you can stop me and ask questions;
-            please do not be shy about shouting out or raising your hand or asking.
+            please do not be shy about putting something in the char or interrupting.
           </Notes>
         </Slide>
         <Slide transition={["zoom"]} bgColor="primary">
@@ -83,28 +84,26 @@ export default class Presentation extends React.Component {
           </Notes>
         </Slide>
         <Slide>
-          <Image src={images.searchResults} width="100%"/>
+          <Image src={images.gruntAndBowerLogos} width="100%"/>
           <Text size={6} textColor="tertiary" italic>
-            2158 projects at Indeed use webpack
+            We just removed Grunt and Bower from the course platform!
           </Text>
           <Notes>
             <div><ul>
-              <li>This may not be the best screenshot, the number is at the top right</li>
-              <li>With the usual "probably a bunch of these aren't real" caveats</li>
-              <li>You probably are or will be on a team that uses webpack</li>
+              <li>We're a webpack shop now (mostly... )</li>
             </ul></div>
           </Notes>
         </Slide>
         <Slide>
           <Image src={images.downloads} width="100%"/>
           <Text size={6} textColor="tertiary" italic>
-            Webpack was downloaded 7.3 million times last week
+            Webpack was downloaded 16.3 million times last week
           </Text>
           <Notes>
             <div><ul>
               <li>This number is actually way smaller than it has any right to be</li>
-              <li>Most coporations, like Indeed, run a private registry, and only install each new webpack version once</li>
-              <li>Should you leave Indeed, you will probably go to a company that uses webpack</li>
+              <li>Most coporations I've worked at run a private registry, and only install each new webpack version once</li>
+              <li>Should you leave Skilljar, you will probably go to a company that uses webpack</li>
             </ul></div>
           </Notes>
         </Slide>
@@ -150,7 +149,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Image src={images.javascript} />
-          <a href="https://www.spacejam.com/archive/spacejam/movie/jam.htm">Space Jam</a>
+          <a href="https://www.spacejam.com/">Space Jam</a>
           <Notes>
             <div>
               And things stayed that way for a long time.  Webmasters used iFrames
@@ -246,8 +245,8 @@ const qs = require('query-string');
 const { myParam } = qa.parse(location.search);
             `} />
             <CodePane lang="sass" source={`
-@import '~/@indeed/frontend-style/foundations/typography';
-// @import '~/@indeed/frontend-style-janus/foundations/typography';
+@import '~/legacy/foundations/typography';
+// @import '~/new/foundations/typography';
 
 .myHeadline {
     @include set-type-headline(md, bold);
@@ -313,7 +312,8 @@ define(['dep1', 'dep2'], function (dep1, dep2) {
             in what it replaced, but what is replacing it.  Already, for developing
             JavaScript libraries, Rollup is preferred over Webpack as it produces
             a smaller output than Webpack.  And, parcel.js is quickly gaining popularity,
-            and may replace Webpack for general purpose use.
+            and may replace Webpack for general purpose use. A couple of other new entrants,
+            Snowpack and Vit promise to produce ES Modules.
 
             What is important to take from my talk, then, is not configuration options,
             but first principles -- graph traversal, dependency management, module definitions.
@@ -323,7 +323,7 @@ define(['dep1', 'dep2'], function (dep1, dep2) {
         <Slide transition={["fade"]} bgColor="primary">
           <Image src={images.webpack} width="100%" />
           <Notes>
-            So, having looked back through history, we can now see webpack and understand
+            So, having looked back through history, we can now see Webpack and understand
             what module bundling is and why we want it.  Module bundling is the act of taking
             lots of small modules from many different languages and packaging them up so
             they are ready to ship to a browser.  We want module bundling to increase
@@ -576,11 +576,28 @@ module.exports = {
           </Notes>
         </Slide>
         <Slide>
-          <Heading size={3} textColor="tertiary">
-            frontend-build
+          <Heading size={5} textColor="tertiary">
+            Dynamic requires
           </Heading>
+          <CodePane lang="javascript" source={`
+const path = require('path');
+
+module.exports = {
+  entry: './index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  }
+};
+          `}
+          />
           <Notes>
-            We can see how frontend-build works in an example (dynamic-require)
+            Lazy loading is often a better solution than a dynamic require.
+            This fetches a logical chunk of code right as you need it,
+            without needing to bundle it in with your main bundle. This is
+            what we do with our Vue components.
+
+            We can see this in an example (lazy-load)
           </Notes>
         </Slide>
         <Slide>
@@ -600,23 +617,7 @@ module.exports = {
           </Notes>
         </Slide>
         <Slide>
-          <Heading size={4} textColor="tertiary">
-            {"That's a lot of stuff"}
-          </Heading>
-          <Text>
-            The front-end team works to increase the velocity of quality user interface development.
-          </Text>
-          <Notes>
-            <ul>
-              <li>We are here to help</li>
-              <li>You will have talks on our product suite that abstracts a lot of this away</li>
-              <li>frontend-skeleton creates most of what you need</li>
-              <li>component libraries in react and soy provide ui building blocks</li>
-              <li>frontend-build provides a build system</li>
-              <li>We focus on tools that Just Work</li>
-              <li>If you are interested, we can help you learn and grow</li>
-            </ul>
-          </Notes>
+          <Image src={images.thatsAllFolks} width="75%"/>
         </Slide>
       </Deck>
     );
