@@ -10,6 +10,7 @@ import {
   Image,
   ListItem,
   List,
+  Notes,
   Quote,
   Slide,
   Text
@@ -53,8 +54,22 @@ export default class Presentation extends React.Component {
             {"Just don't say just"}
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            talking and writing about technical solutions
+            talking, writing, and thinking about technical solutions
           </Text>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>OR</Heading>
+          <Heading size={1} textColor="secondary" fit>SIMPLE IS DIFFICULT</Heading>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>Storytime</Heading>
+          <Notes>
+            One time I was writing the initial version of Lerna and having problems with
+            publishing intermediate builds because we'd have conflicts on CI between branches
+            incrementing minor versions to the same version. My tech lead suggested we "just"
+            use shasums, and I felt super dumb because it was obvious that I didn't understand
+            something that he assumed I should.
+          </Notes>
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>What you say</Heading>
@@ -97,8 +112,44 @@ export default class Presentation extends React.Component {
           </List>
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>{"This goes the other way too"}</Heading>
+          <Heading size={6} textColor="primary" caps>Try to do this when estimating too</Heading>
+          <Heading size={1} textColor="secondary" fit>Things are rarely as simple as they seem</Heading>
+          <Notes>
+            It is an easy trap to fall into when you're doing estimations -- oh, you just do this
+            one thing and then its solved. It's rarely you "just" any ticket -- if it were easy,
+            it would likely already be done. Instead, respect the complexity of tickets -- testing,
+            code reviews, understanding the context etc.
+          </Notes>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>It's not "just" a one line change</Heading>
+          <Heading size={1} textColor="secondary" fit>Test like every change can cause an outage</Heading>
+          <Notes>
+            Even when we have software solutions that seem very simple -- for instance, one-line changes --
+            don't allow yourself to be complacent. One-line changes can take down the service the same as a
+            1000-line change. Make sure to exercise the code under test in all the common use cases and some
+            of the uncommon use cases to make sure it works as anticipated.
+          </Notes>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>Make sure to define your terms</Heading>
+          <Heading size={1} textColor="secondary" fit>Don't assume you know what your audience knows</Heading>
+          <Notes>
+            Defining your terms is a good idea even if you're working with someone that probably does know
+            what you're talking about because many terms are ambiguous. For instance, many people use href
+            and url interchangeably, so it is worthwhile to distinguish if you use "href" to mean a string 
+            and "url" to mean a url object.
+          </Notes>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="tertiary">
+          <Heading size={6} textColor="primary" caps>Most importantly!</Heading>
           <Heading size={1} textColor="secondary" fit>{"Don't sell yourself short"}</Heading>
+          <Notes>
+            This same mentality comes back to haunt us when it comes time to do reviews or to
+            talk about our work with other developers. It is like the joke about the person who
+            repairs the rollers at the New York Times -- $1 to hit it with a wrench, $1999 to
+            know where to hit it with a wrench.
+          </Notes>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
