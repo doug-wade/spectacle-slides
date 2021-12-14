@@ -6,6 +6,9 @@ import {
   Deck,
   Heading,
   Image,
+  List,
+  ListItem,
+  Notes,
   Slide,
   Text
 } from "spectacle";
@@ -30,6 +33,10 @@ const images = {
   gitIndex: require("../assets/git-index.png"),
   gitTwoParents: require("../assets/git-two-parents.png"),
   gitGraph: require("../assets/git-graph.png"),
+  gitCheckout: require("../assets/git-checkout.png"),
+  gitReset: require("../assets/git-reset.png"),
+  gitRebaseMess: require("../assets/git-rebase-mess.png"),
+  gitCommitAmend: require("../assets/git-commit-amend.png"),
 };
 
 preloader(images);
@@ -40,10 +47,18 @@ export default class Presentation extends React.Component {
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
         <Slide>
             <Heading>
-                Getting Git
+                Getting git
             </Heading>
             <Text>
-                Understanding one of the most fundamental development tools
+                Or, How I Learned To Stop Worrying And Love The DAG
+            </Text>
+        </Slide>
+        <Slide>
+            <Heading>
+                It's gonna get weird
+            </Heading>
+            <Text>
+                We're going to use very uncommon git commands you may never see again; don't worry about it.
             </Text>
         </Slide>
         <Slide>
@@ -65,6 +80,17 @@ export default class Presentation extends React.Component {
                 But what's inside?
             </Text>
             <Image src={images.gitInit}/>
+            <Notes>
+                » ls -la .git/
+
+                HEAD === The current commitish that represents the state of the filesystem
+                config === Your git configuration, like ~/.gitconfig for a single repo
+                description === Only for use on GitWeb
+                hooks === The code for hooks to run during the development lifecycle, like precommit
+                info === Contains "exclude", which is a .gitignore specific to you
+                objects === The object database
+                refs === What the branches and tags point to
+            </Notes>
         </Slide>
         <Slide>
             <Heading>
@@ -73,36 +99,13 @@ export default class Presentation extends React.Component {
             <Text>
                 But what's inside?
             </Text>
-            <Image src={images.gitContents}/>
+            <Image src={images.gitContents} height={'500'}/>
         </Slide>
         <Slide>
-            <Heading>
-                git commit
-            </Heading>
-            <Text>
-                Create our first object
-            </Text>
-            <Notes>
-                » git commit --allow-empty -m "initial commit"
-                » git log
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading>
-                empty commit?
-            </Heading>
-            <Text>
-                Always start a new repository with an empty commit so you can rebase your changes
-            </Text>
-            <Notes>
-                reference: https://www.garfieldtech.com/blog/git-empty-commit
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading>Git add</Heading>
+            <Heading>git add</Heading>
             <Text>Staging/Caching/Indexing your files</Text>
             <Notes>
-                » echo 'version 1' &gt; one.txt
+                » echo "version 1 one.txt" &gt; one.txt
                 » ls .git/index
                 » ls .git/objects
                 » git add one.txt
@@ -120,7 +123,7 @@ export default class Presentation extends React.Component {
             </Notes>
         </Slide>
         <Slide>
-            <Heading>Git add</Heading>
+            <Heading>git add</Heading>
             <Image src={images.gitIndex}></Image>
             <Notes>
                 The index file has a bunch of information in it. It's basically the
@@ -132,6 +135,8 @@ export default class Presentation extends React.Component {
                 the device the file is on, the file inode number, the file permissions,
                 the user and group id, the file size, the object id, the file path and
                 some other stuff.
+
+                '%FT%T' is a format string for times.
             </Notes>
         </Slide>
         <Slide>
@@ -142,7 +147,7 @@ export default class Presentation extends React.Component {
                 Create our second object
             </Text>
             <Notes>
-                » echo 'version 1' &gt; two.txt
+                » echo "version 1 two.txt" &gt; two.txt
                 » git add .
                 » git commit -m "version 1"
             </Notes>
@@ -155,13 +160,13 @@ export default class Presentation extends React.Component {
                 We updated HEAD to point to the new commit
 
                 » git log
-                » less .git/refs/heads/master
 
-                But what is a commit? Git is a "content-addressable filesystem" under the covers, 
-                which is a kind of key-value store. Git stores "objects", which are one of four 
+                But what is a commit? git is a "content-addressable filesystem" under the covers, 
+                which is a kind of key-value store. git stores "objects", which are one of four 
                 types: commit, tree, blob, and annotated tag. We can investigate the contents 
                 of the commits we created with git cat-file.
 
+                » less .git/refs/heads/master
                 » git cat-file -t c0a5fa9792db46adf7c3b2a14117124da23dcc13
             </Notes>
         </Slide>
@@ -176,7 +181,7 @@ export default class Presentation extends React.Component {
 
                 » git cat-file -p c0a5fa9792db46adf7c3b2a14117124da23dcc13
 
-                Note that it gives a reference to a "tree", which is another type of Git object
+                Note that it gives a reference to a "tree", which is another type of git object
 
                 » git cat-file -t c784033db59ed8c77840fd8b345c00971381fb89
             </Notes>
@@ -193,7 +198,7 @@ export default class Presentation extends React.Component {
 
                 » git cat-file -p c784033db59ed8c77840fd8b345c00971381fb89
 
-                Note that it gives a reference to a "blob", which is another type of Git object
+                Note that it gives a reference to a "blob", which is another type of git object
 
                 » git cat-file -t 83baae61804e65cc73a7201a7252750c76066a30
             </Notes>
@@ -230,9 +235,13 @@ export default class Presentation extends React.Component {
             <Text>You said there were four object types...</Text>
             <Notes>
                 » git tag -a v1 -m "version 1"
-                » ls -R .git/objects
+                » cat .git/refs/tags/v1
                 » git cat-file -t 931093016e32e7ef826b10e50cd52d87976ef14c
                 » git cat-file -p 931093016e32e7ef826b10e50cd52d87976ef14c
+
+                It also points to a commitish
+
+                » git cat-file -p 89319c2ab2ce42cdb0ede974599ee2bfbc3774fa
             </Notes>
         </Slide>
         <Slide>
@@ -243,7 +252,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
             <Heading>
-                Git branch
+                git branch
             </Heading>
             <Text>Starting development</Text>
             <Notes>
@@ -254,7 +263,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
             <Heading>
-                Git branch
+                git branch
             </Heading>
             <Image src={images.gitBranch}></Image>
             <Notes>
@@ -262,11 +271,14 @@ export default class Presentation extends React.Component {
                 to a commit and an identifying name. The commits themselves contain
                 pointers to their parents, so the branch object doesn't need to track
                 the history of the branch.
+
+                » git cat-file -p 89319c2ab2ce42cdb0ede974599ee2bfbc3774fa
+
                 Underline that a commit has a parent as part of what defines the commit.
             </Notes>
         </Slide>
         <Slide>
-            <Heading>Git Checkout</Heading>
+            <Heading>git Checkout</Heading>
             <Text>Moving HEAD</Text>
             <Notes>
                 As we noted while branching, there is a HEAD, which points to the commit
@@ -279,27 +291,42 @@ export default class Presentation extends React.Component {
                 » git co v1
                 » cat .git/HEAD
                 » git co branch-one
+
+                HEAD can point to any commitish.
             </Notes>
         </Slide>
         <Slide>
-            <Heading>Git merge</Heading>
+            <Heading>git Checkout</Heading>
+            <Image src={images.gitCheckout}></Image>
+        </Slide>
+        <Slide>
+            <Heading>git merge</Heading>
             <Text>Commits with two parents</Text>
             <Notes>
-                » echo 'version 1' &gt; three.txt
-                » git commit -am 'add three.txt'
+                » echo "version 1 three.txt" &gt; three.txt
+                » git add .
+                » git commit -m "add three.txt"
                 » git co master
+                » echo "version 2 one.txt" &gt; one.txt
+                » git add .
+                » git commit -m "version 2 one.txt"
                 » git merge branch-one
+
+                We have to commit to master as well to simulate real-world situations
+                and to avoid a fast-forward merge
             </Notes>
         </Slide>
         <Slide>
-            <Heading>Git merge</Heading>
+            <Heading>git merge</Heading>
             <Image src={images.gitTwoParents}></Image>
             <Notes>
                 Note that this commit has two parents!
+
+                » git cat-file -p 5079a55cab2a7fc9a6081d570356ecd6aa7e31cd
             </Notes>
         </Slide>
         <Slide>
-            <Heading>Git merge</Heading>
+            <Heading>git merge</Heading>
             <Image src={images.gitGraph}></Image>
             <Notes>
                 Note that this commit has two parents!
@@ -309,7 +336,7 @@ export default class Presentation extends React.Component {
             <Heading>Interlude: The DAG</Heading>
             <Text>Its all a Directed Acyclic Graph</Text>
             <Notes>
-                At its core, Git represents your version history as a directed,
+                At its core, git represents your version history as a directed,
                 acyclic graph. A graph is a datastructure from computer science
                 that has nodes and edges. For example, the World-Wide Web can be
                 represented as a graph, with the pages being nodes and the links
@@ -335,7 +362,7 @@ export default class Presentation extends React.Component {
             <Heading>git reset</Heading>
             <Text>No-one ever needs to know</Text>
             <Notes>
-                » echo 'regretable change' &gt; one.txt
+                » echo "regretable change" &gt; one.txt
                 » git commit -am 'regretable change'
 
                 Great, so we've committed directly to master, which is a protected
@@ -365,14 +392,19 @@ export default class Presentation extends React.Component {
             </Notes>
         </Slide>
         <Slide>
+            <Heading>git reset</Heading>
+            <Image src={images.gitReset}></Image>
+        </Slide>
+        <Slide>
             <Heading>git reflog</Heading>
             <Text>Nothing is ever lost</Text>
             <Notes>
                 Let's "lose" another commit.
 
-                » echo 'lost change' &gt;&gt; one.txt
+                » echo "lost change" &gt;&gt; two.txt
                 » git commit -am "lose me"
                 » git reset --hard HEAD~1
+                » clear
 
                 So, now we have a lost commit and we don't know its shasum. How
                 do we get it back?
@@ -402,6 +434,9 @@ export default class Presentation extends React.Component {
             </Notes>
         </Slide>
         <Slide>
+            <Image src={images.gitRebaseMess}></Image>
+        </Slide>
+        <Slide>
             <Heading>git rebase</Heading>
             <Text>A more elegant merge strategy</Text>
             <Notes>
@@ -410,12 +445,12 @@ export default class Presentation extends React.Component {
 
                 » git co master
                 » git co -b branch-three
-                » echo 'new feature' &gt;&gt; one.txt
+                » echo "new feature one.txt" &gt;&gt; one.txt
                 » git add one.txt
-                » git commit -am "my new feature"
+                » git commit -am "my new feature one.txt"
                 » git co master
-                » echo 'new feature' &gt;&gt; two.txt
-                » git commit -am "my new feature"
+                » echo "new feature two.txt" &gt;&gt; two.txt
+                » git commit -am "my new feature two.txt"
                 » git co -
                 » git rev-parse head
                 » git rebase master
@@ -452,12 +487,22 @@ export default class Presentation extends React.Component {
                 creating a new commit.
 
                 » git rev-parse head
-                » git commit --amend
+                » git commit --amend --author="Cristian Roldan &lt;cr7&#64;soundersfc.com&gt;"
                 » git rev-parse head
             </Notes>
         </Slide>
         <Slide>
+            <Heading>git commit --amend</Heading>
+            <Image src={images.gitCommitAmend}></Image>
+            <Notes>
+                » git cat-file -p 1b0ebcdc6aaaf0711433b5cbac2ea551f5020557
+            </Notes>
+        </Slide>
+        <Slide>
             <Heading>Questions?</Heading>
+        </Slide>
+        <Slide>
+            <Image src={'http://www.angelaslatter.com/wp-content/uploads/2011/12/otters.jpg'}></Image>
         </Slide>
       </Deck>
     );
