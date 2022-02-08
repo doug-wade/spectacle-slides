@@ -1,54 +1,65 @@
-/* eslint-disable */
+'use strict';
 
-var path = require("path");
-var webpack = require("webpack");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// Customized babel loader with the minimum we need to get `mdx` libraries
+// working, which unfortunately codegen JSX instead of JS.
+const babelLoader = {
+  loader: require.resolve('babel-loader'),
+  options: {
+    // Use user-provided .babelrc
+    babelrc: true,
+    // ... with some additional needed options.
+    presets: [require.resolve('@babel/preset-react')]
+  }
+};
+
+/**
+ * Base configuration for the CLI, core, and examples.
+ */
 
 module.exports = {
-  devtool: "cheap-module-source-map",
-  entry: [
-    "babel-polyfill",
-    'webpack-hot-middleware/client',
-    "react-hot-loader/patch",
-    "./index"
-  ],
+  mode: 'development',
+  entry: './index.js',
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: "bundle.js",
-    publicPath: "/dist",
+    path: path.resolve('dist'),
+    filename: 'deck.js'
   },
-  plugins: [
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  devtool: 'source-map',
   module: {
-    loaders: [{
-      test: /\.md$/,
-      loader: "html-loader!markdown-loader?gfm=false"
-    }, {
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: "babel-loader",
-      include: __dirname
-    }, {
-      test: /\.css$/,
-      loaders: ["style-loader", "raw-loader"],
-      include: __dirname
-    }, {
-      test: /\.svg$/,
-      loader: "url-loader?limit=10000&mimetype=image/svg+xml",
-      include: path.join(__dirname, "assets")
-    }, {
-      test: /\.png$/,
-      loader: "url-loader?mimetype=image/png",
-      include: path.join(__dirname, "assets")
-    }, {
-      test: /\.gif$/,
-      loader: "url-loader?mimetype=image/gif",
-      include: path.join(__dirname, "assets")
-    }, {
-      test: /\.jpg$/,
-      loader: "url-loader?mimetype=image/jpg",
-      include: path.join(__dirname, "assets")
-    }]
-  }
+    // Not we use `require.resolve` to make sure to use the loader installed
+    // within _this_ project's `node_modules` traversal tree.
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: [babelLoader]
+      },
+      // `.md` files are processed as pure text.
+      {
+        test: /\.md$/,
+        use: [require.resolve('raw-loader')]
+      },
+      // `.mdx` files go through babel and our mdx transforming loader.
+      {
+        test: /\.mdx$/,
+        use: [babelLoader, require.resolve('spectacle-mdx-loader')]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [require.resolve('file-loader')]
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ]
+  },
+  // Default for boilerplate generation.
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Spectacle presentation',
+      template: './index.html'
+    })
+  ]
 };

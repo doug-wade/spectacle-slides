@@ -17,11 +17,9 @@ import {
   Text
 } from "spectacle";
 
-// Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
 
 // Import theme
-import createTheme from "spectacle/lib/themes/default";
+import { theme } from "spectacle-theme-solarized-dark";
 
 // Require CSS
 require("normalize.css");
@@ -32,18 +30,6 @@ const images = {
   logo: require("../assets/formidable-logo.svg"),
   markdown: require("../assets/markdown.png")
 };
-
-preloader(images);
-
-const theme = createTheme({
-  primary: "white",
-  secondary: "#1F2022",
-  tertiary: "#03A9FC",
-  quartenary: "#CECECE"
-}, {
-  primary: "Montserrat",
-  secondary: "Helvetica"
-});
 
 export default class Presentation extends React.Component {
   render() {
@@ -551,6 +537,9 @@ export default {
                 way we expect -- in this case, it doesn't really matter if emitting the event triggers
                 the right values, it matters if the click triggers the event.
             </Notes>
+        </Slide>
+        <Slide>
+          <Heading>Mock the network</Heading>
         </Slide>
       </Deck>
     );

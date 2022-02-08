@@ -13,9 +13,6 @@ import {
   Text
 } from "spectacle";
 
-// Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
-
 // Import theme
 import { theme } from "spectacle-theme-solarized-dark";
 
@@ -38,8 +35,6 @@ const images = {
   gitRebaseMess: require("../assets/git-rebase-mess.png"),
   gitCommitAmend: require("../assets/git-commit-amend.png"),
 };
-
-preloader(images);
 
 export default class Presentation extends React.Component {
   render() {

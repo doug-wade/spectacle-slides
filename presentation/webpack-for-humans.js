@@ -18,11 +18,6 @@ import {
   Text
 } from "spectacle";
 
-// Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
-
-// Import theme
-import createTheme from "spectacle/lib/themes/default";
 import { theme } from "spectacle-theme-solarized-dark";
 
 // Require CSS
@@ -45,8 +40,6 @@ const images = {
   gruntAndBowerLogos: require('../assets/grunt-and-bower-logo.png'),
   thatsAllFolks: require('../assets/thats-all-folks.gif'),
 };
-
-preloader(images);
 
 export default class Presentation extends React.Component {
   render() {
