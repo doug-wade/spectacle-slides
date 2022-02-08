@@ -5,7 +5,6 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: [
-    "babel-polyfill",
     "./index"
   ],
   output: {
@@ -42,6 +41,9 @@ module.exports = {
     }, {
       test: /\.svg$/,
       loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+    }, {
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
     }]
   }
 };

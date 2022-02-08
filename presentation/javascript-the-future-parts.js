@@ -16,11 +16,21 @@ import {
   Text
 } from "spectacle";
 
-// Import image preloader util
-import preloader from "spectacle/lib/utils/preloader";
-
-// Import theme
-import createTheme from "spectacle/lib/themes/default";
+const theme = {
+  fonts: {
+    primary: "Menlo"
+  },
+  colors: {
+    primary: "#042B35",
+    secondary: "#D2A03E",
+    tertiary: "#FD853D",
+    quartenary: "#A7A7A7",
+    code: "#A7A7A7",
+    text: "#A7A7A7",
+    link: "#D2A03E"
+  }
+};
+// SPECTACLE_CLI_THEME_END
 
 // Require CSS
 require("normalize.css");
@@ -30,18 +40,6 @@ const images = {
   crystalBall: require("../assets/Crystal-ball.jpg"),
   babel: require("../assets/babel.png"),
 };
-
-preloader(images);
-
-const theme = createTheme({
-  primary: "white",
-  secondary: "#1F2022",
-  tertiary: "#03A9FC",
-  quartenary: "#CECECE"
-}, {
-  primary: "Montserrat",
-  secondary: "Helvetica"
-});
 
 export default class Presentation extends React.Component {
   render() {
@@ -453,7 +451,7 @@ import { dedent } from '@std/strings'
             <ListItem><Code>Atomics.waitAsync</Code></ListItem>
 	    <ListItem>Import Assertions</ListItem>
             <ListItem>Realms</ListItem>
-            <ListItem><Code>=>*</Code> Generator arrow functions</ListItem>
+            <ListItem><Code>=&gt;*</Code> Generator arrow functions</ListItem>
             <ListItem><Code>Promise.try</Code></ListItem>
             <ListItem>Error stacks</ListItem>
 	    <ListItem><Code>Function.sent</Code></ListItem>
