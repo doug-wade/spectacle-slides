@@ -1,0 +1,19 @@
+<template>
+  <h1>{example}</h1>
+</template>
+
+<script>
+  export default {
+    props: { example: { type: String } }
+  }
+</script>
+
+test('it sets the prop', () => {
+  const component = mount(MyComponent, { propData: { example: 'foo' }})
+  expect(component.vm.example).toBe('foo')
+})
+
+test('it sets the prop', () => {
+  const component = mount(MyComponent, { propData: { example: 'foo' }})
+  expect(component.find('div').text()).toContain('foo')
+})

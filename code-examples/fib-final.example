@@ -1,0 +1,25 @@
+import { makeAdder, makeSubtracter } from './func-utils'
+
+// const makeAdder = (x) => (n) => n + x
+// const makeSubtracter = (x) => (n) => n - x 
+
+const fib = (n) => {
+  if (n === 0 || n === 1) {
+    return n
+  }
+  return makeAdder(fib(makeSubtracter(1)(n) + fib(makeSubtracter(2)(n))(n)
+}
+export default { fib }
+
+test('should calculate fibonacci numbers', () => {
+  expect(fib(5)).toBe(8)
+})
+
+test('should calculate fibonacci numbers', () => {
+  const mockAdder = jest.spyOn(makeAdder)
+  const mockSubtracter = jest.spyOn(makeSubtracter)
+
+  fib(5)
+
+  expect(mockAdder).toBeCalledWith(3)
+})

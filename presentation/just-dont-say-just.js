@@ -44,13 +44,6 @@ const template = () => (
 // Require CSS
 require('normalize.css');
 
-const images = {
-  city: require('../assets/city.jpg'),
-  kat: require('../assets/kat.png'),
-  logo: require('../assets/formidable-logo.svg'),
-  markdown: require('../assets/markdown.png')
-};
-
 // see also https://css-tricks.com/words-avoid-educational-writing/
 export default class Presentation extends React.Component {
   render() {

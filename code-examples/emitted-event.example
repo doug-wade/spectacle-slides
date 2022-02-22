@@ -1,0 +1,26 @@
+<template>
+  <button class="button__primary" @click="clickHandler">Click me!</button>
+</template>
+
+<script>
+export default {
+  name: 'PrimaryButton',
+
+  methods: { 
+    clickHandler() {
+      this.$emit('click', 'value-one', 'value-two')
+    }
+  }
+}
+</script>
+
+test('increments correctly', () => {
+  const wrapper = mount(PrimaryButton)
+  wrapper.find('button').trigger('click')
+
+  const { click } = wrapper.emitted()
+  // wrapper.vm.emitEvent() ???
+
+  expect(click[0]).toBe('value-one')
+  expect(click[1]).toBe('value-two')
+})

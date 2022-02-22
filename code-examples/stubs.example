@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <sj-datatable attribute="value" />
+  </div>
+</template>
+
+<script>
+  export default {
+    components: {
+      'sj-datatable': () => import('@/components/Datatable/Datatable')
+    }
+  }
+</script>
+
+test('it instantiates a datatable', () => {
+  const component = mount(MyComponent, {
+    stubs: {
+      'sj-datatable': {
+          template: '<span class="datatable-stub" />'
+        }
+      }
+    }
+  });
+  
+  expect(component.find('.datatable-stub').attribute('prop')).toBe('value');
+});

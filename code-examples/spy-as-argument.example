@@ -1,0 +1,29 @@
+<template>
+<div>
+  <button class="button__primary" @click="clickHandler">Click Me!</p>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'PrimaryButton',
+  props: {
+    onclick: {
+        type: Object
+    }
+  },
+  methods: {
+      click() {
+          this.onclick()
+      }
+  },
+}
+</script>
+
+test('increments correctly', () => {
+  const clickSpy = jest.spy()
+  const wrapper = mount(PrimaryButton, { onclick: clickSpy })
+  wrapper.find('button').trigger('click')
+
+  expect(clickSpy).toHaveBeenCalled()
+})

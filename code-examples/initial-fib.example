@@ -1,0 +1,11 @@
+const fib = (n) => {
+    if (n === 0 || n === 1) {
+        return n
+    }
+    return fib(n-1) + fib(n-2)
+}
+export default { fib }
+
+test('should calculate fibonacci numbers', () => {
+  expect(fib(5)).toBe(8)
+})
