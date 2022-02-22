@@ -26,6 +26,7 @@ import blackBoxTesting from "../assets/black-box-testing.png";
 import testWarnings from "../assets/test-warnings.png";
 
 const badCounterTest = require("raw-loader!../code-examples/bad-counter-test.example").default;
+const componentsAsFunctions = require("raw-loader!../code-examples/components-as-functions.example").default;
 const emittedEvent = require("raw-loader!../code-examples/emitted-event.example").default;
 const fibFinal = require("raw-loader!../code-examples/fib-final.example").default;
 const fibrMock = require("raw-loader!../code-examples/fibr-mock.example").default;
@@ -105,34 +106,11 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
             <Heading>Components as pure functions</Heading>
-            <CodePane language="javascript">
-              {`
- Vue.component('lesson-title', {
-    props: ['title'],
-    template: '<span>{{ title }}</span>'
-  })
-          `}
-          </CodePane>
-          <CodePane language="javascript">{`
-  function lessonTitle(title) {
-    return document.createElement('span').setAttribute('text', title);
-  }
-          `}
-          </CodePane>
-          <CodePane language="javascript">{`
-const fib = (n) => {
-    if (n === 0 || n === 1) {
-        return n
-    }
-    return fib(n-1) + fib(n-2)
-}
-          `}
-          </CodePane>
+            <CodePane language="javascript" highlightRanges={[[1, 4], [6, 8], [10, 15]]}>{componentsAsFunctions}</CodePane>
             <Notes>
                 I'm going to get started with something really simple and NOT a component so we can think about unit testing
                 independent of Vue; then we'll add the particulars of the framework. Note that all three examples are the
                 same for the purpose of unit testing -- they are a pure function that takes some input and returns some output.
-                Check out renderElement: https://github.com/skilljar/course-platform/blob/6c87174bb672be5926d603463133de7c922349d3/web-resources/js/pages/courses/expandable-view.js#L141
             </Notes>
         </Slide>
         <Slide>

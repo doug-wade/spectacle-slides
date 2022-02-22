@@ -1,0 +1,15 @@
+Vue.component('lesson-title', {
+  props: ['title'],
+  template: '<span>{{ title }}</span>'
+})
+
+function lessonTitle(title) {
+  return document.createElement('span').setAttribute('text', title);
+}
+
+const fib = (n) => {
+  if (n === 0 || n === 1) {
+      return n
+  }
+  return fib(n-1) + fib(n-2)
+}
