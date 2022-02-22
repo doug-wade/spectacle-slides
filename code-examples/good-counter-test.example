@@ -1,0 +1,24 @@
+<template>
+<div>
+  <p>{{ value }}</p>
+  <button @click="increment">Increment</p>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'Counter',
+  methods: {
+      increment() {
+          this.value++
+      }
+  },
+}
+</script>
+
+test('increments correctly', () => {
+  const wrapper = mount(Counter)
+  wrapper.find('button').trigger('click')
+
+  expect(wrapper.text()).toBe('1')
+})

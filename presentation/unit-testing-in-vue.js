@@ -4,80 +4,122 @@ import React from "react";
 // Import Spectacle Core tags
 import {
   BlockQuote,
+  Box,
   Cite,
   Code,
   CodePane,
   Deck,
+  FlexBox,
+  FullScreen,
   Heading,
+  Image,
   ListItem,
-  List,
+  UnorderedList,
   Notes,
+  Progress,
   Quote,
   Slide,
   Text
 } from "spectacle";
 
+import blackBoxTesting from "../assets/black-box-testing.png";
+import testWarnings from "../assets/test-warnings.png";
 
-// Import theme
-import { theme } from "spectacle-theme-solarized-dark";
+const badCounterTest = require("raw-loader!../code-examples/bad-counter-test.example").default;
+const emittedEvent = require("raw-loader!../code-examples/emitted-event.example").default;
+const fibFinal = require("raw-loader!../code-examples/fib-final.example").default;
+const fibrMock = require("raw-loader!../code-examples/fibr-mock.example").default;
+const goodCounterTest = require("raw-loader!../code-examples/good-counter-test.example").default;
+const initialFib = require("raw-loader!../code-examples/initial-fib.example").default;
+const mountVsShallowMount = require("raw-loader!../code-examples/mount-vs-shallow-mount.example").default;
+const spyAsArgument = require("raw-loader!../code-examples/spy-as-argument.example").default;
+const spyOnApiService = require("raw-loader!../code-examples/spy-on-api-service.example").default;
+const stubs = require("raw-loader!../code-examples/stubs.example").default;
+const vueInternals = require("raw-loader!../code-examples/vue-internals.example").default;
+
+const theme = {
+  fonts: {
+    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
+    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif'
+  }
+};
 
 // Require CSS
 require("normalize.css");
 
-const images = {
-  city: require("../assets/city.jpg"),
-  kat: require("../assets/kat.png"),
-  logo: require("../assets/formidable-logo.svg"),
-  markdown: require("../assets/markdown.png")
-};
+const template = () => (
+  <FlexBox
+    justifyContent="space-between"
+    position="absolute"
+    bottom={0}
+    width={1}
+  >
+    <Box padding="0 1em">
+      <FullScreen />
+    </Box>
+    <Box padding="1em">
+      <Progress />
+    </Box>
+  </FlexBox>
+);
 
 export default class Presentation extends React.Component {
   render() {
     return (
-      <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+      <Deck template={template} theme={theme}>
+        <Slide>
+          <Heading fit caps>
             Unit Testing in Vue
           </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+          <Text fit bold textAlign="center">
             Writing tests effectively
           </Text>
         </Slide>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Functional Programming alert!!!
+        <Slide>
+          <Heading fit caps>
+            A disclaimer
           </Heading>
+          <UnorderedList>
+              <ListItem>Functional programming examples</ListItem>
+              <ListItem>Expected background knowledge</ListItem>
+              <ListItem>I've never run this code</ListItem>
+              <ListItem>No semicolons</ListItem>
+          </UnorderedList>
           <Notes>
               Functional programming = best programming so I'll use it as much as possible
               Everything is the same for OO code, since objects and closures are the same thing
+              I assume you know how to do simple things with FE tests, like set props and interact with elements; if not, stop me and ask
+              The code is an example; I haven't run it so there might be errors
+              We require semicolons because you can get bugs without them but I like the aesthetic
           </Notes>
         </Slide>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
+        <Slide>
+          <Heading fit caps>
             Why unit testing?
           </Heading>
-          <List>
+          <UnorderedList>
               <ListItem>Safety when making changes</ListItem>
               <ListItem>Write better code</ListItem>
               <ListItem>Form of documentation</ListItem>
-          </List>
+          </UnorderedList>
         </Slide>
         <Slide>
-            <Heading size={4}>Components as pure functions</Heading>
-            <CodePane lang="javascript" source={`
+            <Heading>Components as pure functions</Heading>
+            <CodePane language="javascript">
+              {`
  Vue.component('lesson-title', {
     props: ['title'],
     template: '<span>{{ title }}</span>'
   })
           `}
-          />
-          <CodePane lang="javascript" source={`
+          </CodePane>
+          <CodePane language="javascript">{`
   function lessonTitle(title) {
-    return renderElement('span', {textContent: title});
+    return document.createElement('span').setAttribute('text', title);
   }
           `}
-          />
-            <CodePane lang="javascript" source={`
+          </CodePane>
+          <CodePane language="javascript">{`
 const fib = (n) => {
     if (n === 0 || n === 1) {
         return n
@@ -85,7 +127,7 @@ const fib = (n) => {
     return fib(n-1) + fib(n-2)
 }
           `}
-          />
+          </CodePane>
             <Notes>
                 I'm going to get started with something really simple and NOT a component so we can think about unit testing
                 independent of Vue; then we'll add the particulars of the framework. Note that all three examples are the
@@ -94,23 +136,8 @@ const fib = (n) => {
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>Getting started</Heading>
-            <CodePane lang="javascript" source={`
-const fib = (n) => {
-    if (n === 0 || n === 1) {
-        return n
-    }
-    return fib(n-1) + fib(n-2)
-}
-export default { fib }
-
-describe('fib', () => {
-    it('should calculate fibonacci numbers', () => {
-        expect(fib(5)).toBe(8)
-    })
-})
-          `}
-          />
+            <Heading>Getting started</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 7], [9, 13]]}>{initialFib}</CodePane>
             <Notes>
                 So here's a test! It doesn't really get any simpler than that. I include the
                 export because, along with the function definition, it defines the contract
@@ -121,34 +148,8 @@ describe('fib', () => {
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>Refactoring</Heading>
-            <CodePane lang="javascript" source={`
-const fibR = (n, memo) => {
-    if (memo[n]) {
-        return memo[n]
-    }
-    memo[n] = fib(n-1, memo) + fib(n-2, memo)
-    return memo[n]
-}
-const fib = (n) => {
-    return fibR(n, [0,1])
-}
-export default { fib }
-
-describe('fib', () => {
-    it('should calculate fibonacci numbers', () => {
-        expect(fib(5)).toBe(8)
-    })
-
-    it('should test with mocks', () => {
-        const fibRSpy = jest.spyOn(fibR)
-        fib(5)
-        
-        expect(fibRSpy).toHaveBeenCalled()
-    })
-})
-          `}
-          />
+            <Heading>Refactoring</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 12], [14, 16], [18, 23]]}>{fibrMock}</CodePane>
             <Notes>
                 We've refactored! Note that we don't have to change our tests, so we can feel confident
                 that we haven't broken anything, and we know that we won't have to change any of the call
@@ -160,28 +161,76 @@ describe('fib', () => {
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>What is the unit under test?</Heading>
-            <CodePane lang="javascript" source={`
-import { makeAdder, makeSubtracter } from './func-utils'
+          <Heading>Black box testing</Heading>
+          <FlexBox alignItems="center" justifyContent="center">
+            <Image src={blackBoxTesting} />
+          </FlexBox>
+        </Slide>
+        <Slide>
+            <Heading>More refactoring</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 12], [14, 16], [18, 25]]}>{fibFinal}</CodePane>
+            <Notes>
+                Note that when we refactor a second time, our original unit test still covers the unit
+                under test, while our newer test no longer applies.
+            </Notes>
+        </Slide>
+        <Slide>
+            <Heading>Components as pure functions</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 6], [8, 17], [19, 25]]}>{badCounterTest}</CodePane>
+            <Notes>
+                Now we're getting into realistic testing scenarios. Here, we trigger a click handler on a
+                button. In a lot of our tests, we mock out the handler and then assert that it will be
+                called. However, this means we don't test the actual handler, and we end up testing the
+                internals of our component -- our clients will never call the handler directly, so we don't
+                want it appearing in our documentation.
+            </Notes>
+        </Slide>
+        <Slide>
+            <Heading>Components as pure functions redux</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 6], [8, 17], [19, 24]]}>{goodCounterTest}</CodePane>
+            <Notes>
+                A much better solution is to exercise the code in the click handler and then test the result.
+                This is the same as our fibR example -- its not particularly interesting that we call the
+                handler with the right arguments internally; its interesting that we produce the correct DOM.
+                This goes back to the idea that we should think of components as pure functions from props to
+                DOM.
+            </Notes>
+        </Slide>
+        <Slide>
+            <Heading>Spies</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 5], [7, 21], [23, 29]]}>{spyAsArgument}</CodePane>
+            <Notes>
+                So what do we use spies for, then? Spies are useful when a prop is a function.
+                It allows us to check that the callback was executed with the arguments that we
+                expect, since passing arguments to a callback is part of our contract with our
+                clients; part of our output.
+            </Notes>
+        </Slide>
+        <Slide>
+            <Heading>Spies</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 6], [8, 23], [25, 33]]}>{spyOnApiService}</CodePane>
+            <Notes>
+                So what else do we use spies for, then? Spies are useful when there are side-effects.
+                The line between what is output and what is a side-effect can be somewhat blurry at
+                times, but the network and console output are both canonical examples of side-effects.
+                We have to spy on the ApiService because it can't make real network calls. We do,
+                however, need to test that the processing of the response is correct, so we need to
+                mock the return value and validate that it has been handled properly by the component.
 
-// const makeAdder = (x) => (n) => n + x
-// const makeSubtracter = (x) => (n) => n - x 
+                Here's a more realistic example of taking a dependency. In this case, we don't have
+                any choice but to mock the dependency, because it is _not_ a pure function! It has
+                side-effects -- the network. Some functional languages don't allow side-effects for
+                for this kind of reason, but thankfully javascript isn't one of them, because it
+                requires the most complicated cs idea I've ever encountered -- monads. I do have
+                a couple of question marks here as to what we should assert. GET requests should be
+                idempotent, so we don't technically need to make the request, but I might anyway.
 
-const fib = (n) => {
-    if (n === 0 || n === 1) {
-        return n
-    }
-    return makeAdder(fib(makeSubtracter(1)(n) + fib(makeSubtracter(2)(n))(n)
-}
-export default { fib }
-
-describe('fib', async () => {
-    it('should calculate fibonacci numbers', () => {
-        expect(fib(5)).toBe(8)
-    })
-})
-          `}
-          />
+                Always! Mock! The! Network!
+            </Notes>
+        </Slide>
+        <Slide>
+            <Heading>Unit under test</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 12], [14, 16], [18, 25]]}>{fibFinal}</CodePane>
             <Notes>
                 One of the hard parts about unit testing is defining what the unit under test is.
                 In this case, my tests are actually testing both the fib function, but also the
@@ -193,141 +242,8 @@ describe('fib', async () => {
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>Side-effects</Heading>
-            <CodePane lang="javascript" source={`
-import ApiService from './ApiService'
-const fib = (n) => {
-    return ApiService.getFib(n)
-}
-export default { fib }
-
-describe('fib', async () => {
-    it('should calculate fibonacci numbers', async () => {
-        const input = 5
-        const expectedResult = 8
-        const getFibSpy = jest.spyOn(ApiService, 'getFib').mockReturnValue(expectedResult)
-        const result = await fib(input)
-
-        expect(result).toBe(expectedResult)
-        // expect(getFibSpy).toHaveBeenCalled() ??
-        // expect(getFibSpy).toHaveBeenCalledWith(input) ???
-    })
-})
-          `}
-          />
-            <Notes>
-                Here's a more realistic example of taking a dependency. In this case, we don't have
-                any choice but to mock the dependency, because it is _not_ a pure function! It has
-                side-effects -- the network. Some functional languages don't allow side-effects for
-                for this kind of reason, but thankfully javascript isn't one of them, because it
-                requires the most complicated cs idea I've ever encountered -- monads. I do have
-                a couple of question marks here as to what we should assert. GET requests should be
-                idempotent, so we don't techincally need to make the request, but I might anyway.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Side-effects</Heading>
-            <CodePane lang="javascript" source={`
-import ApiService from './ApiService'
-const fib = (n) => {
-    return ApiService.getFib(n)
-}
-export default { fib }
-
-describe('fib', async () => {
-    it('should calculate fibonacci numbers', async () => {
-        const input = 5
-        const expectedResult = 8
-        const getFibSpy = jest.spyOn(ApiService, 'getFib').mockReturnValue(expectedResult)
-        const result = await fib(input)
-
-        expect(result).toBe(expectedResult)
-        // expect(getFibSpy).toHaveBeenCalled() ??
-        // expect(getFibSpy).toHaveBeenCalledWith(input) ???
-    })
-})
-          `}
-          />
-            <Notes>
-                Here's a more realistic example of taking a dependency. In this case, we don't have
-                any choice but to mock the dependency, because it is _not_ a pure function! It has
-                side-effects -- the network. Some functional languages don't allow side-effects for
-                for this kind of reason, but thankfully javascript isn't one of them, because it
-                requires the most complicated cs idea I've ever encountered -- monads. I do have
-                a couple of question marks here as to what we should assert. GET requests should be
-                idempotent, so we don't techincally need to make the request, but I might anyway.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Components as pure functions again</Heading>
-            <CodePane lang="javascript" source={`
- const LessonTitle = Vue.component('lesson-title', {
-    props: ['title'],
-    template: '<span>{{ title }}</span>'
-  })
-  test('displays title', () => {
-    const title = 'frontend team 4 lyfe'
-    const wrapper = mount(LessonTitle, {
-      propsData: { title }
-    })
-
-    expect(wrapper.text()).toContain(title)
-  })
-          `}
-          />
-            <Notes>
-                And so we come back to our original example. This is the same as our fib function -- its
-                a pure function from props to DOM. When we test it, we give it some stable input and expect
-                some stable output. There's a fancy wrapper object around the rendered Vue component that
-                allows us convenience methods to interact with it, but fundamentally its still just a pure
-                function from props to DOM.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Vue vs. renderElement</Heading>
-            <CodePane lang="javascript" source={`
-  function lessonTitle(title) {
-    return renderElement('span', {textContent: title});
-  }
-  test('displays title', () => {
-    const title = 'frontend team 4 lyfe'
-    const wrapper = lessonTitle(title)
-
-    expect(title.innerText).toContain(title)
-  })
-          `}
-          />
-            <Notes>
-                This is _exactly_ the same thing as the Vue example.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Mount vs shallowMount</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<div>
-  <child-component msg="I'm a child" />
-  <p>I'm a parent</p>
-</div>
-</template>
-
-<script>
-import ChildComponent from './ChildComponent'
-
-export default {
-  name: 'ParentComponent',
-  components: { ChildComponent },
-}
-</script>
-  test('renders correctly', () => {
-    //const wrapper = mount(ParentComponent) ???
-    //const wrapper = shallowMount(ParentComponent) ???
-
-    expect(wrapper.text()).toContain("I'm a parent")
-    //expect(wrapper.text()).toContain("I'm a child") this fails
-  })
-          `}
-          />
+            <Heading>Mount vs shallowMount</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 6], [8, 15], [17, 23]]}>{mountVsShallowMount}</CodePane>
             <Notes>
                 When we're testing a component, we have a choice whether to mount or shallowMount
                 a given component while testing. shallowMounting doesn't render the child components,
@@ -339,194 +255,25 @@ export default {
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>Components as pure functions</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<div>
-  <p>{{ value }}</p>
-  <button @click="increment">Increment</p>
-</div>
-</template>
-
-<script>
-export default {
-  name: 'Counter',
-  methods: {
-      increment() {
-          this.value++
-      }
-  },
-}
-</script>
-  test('increments correctly', () => {
-    const incrementSpy = jest.spyOn(Counter.methods, 'increment')
-    const wrapper = mount(Counter)
-    wrapper.find('button').trigger('click')
-
-    expect(incrementSpy).toHaveBeenCalled()
-  })
-          `}
-          />
+            <Heading>Stubs</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 5], [6, 13], [15, 26]]}>{stubs}</CodePane>
             <Notes>
-                Now we're getting into realistic testing scenarios. Here, we trigger a click handler on a
-                button. In a lot of our tests, we mock out the handler and then assert that it will be
-                called. However, this means we don't test the actual handler, and we end up testing the
-                internals of our component -- our clients will never call the handler directly, so we don't
-                want it appearing in our documentation.
+                When we're testing a component, we have a choice whether to mount or shallowMount
+                a given component while testing. shallowMounting doesn't render the child components,
+                so for example in this code snippet we wouldn't render ChildComponent and so querying
+                for "I'm a child" will return nothing. So, which one should we use? For a true unit
+                test, you would use shallowMount, the same as you would mock makeAdder. This has the
+                added benefit of rendering faster! But I would still use mount here for the same reasons
+                that I wouldn't mock makeAdder.
             </Notes>
         </Slide>
         <Slide>
-            <Heading size={4}>Components as pure functions redux</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<div>
-  <p>{{ value }}</p>
-  <button @click="increment">Increment</p>
-</div>
-</template>
-
-<script>
-export default {
-  name: 'Counter',
-  methods: {
-      increment() {
-          this.value++
-      }
-  },
-}
-</script>
-  test('increments correctly', () => {
-    const wrapper = mount(Counter)
-    wrapper.find('button').trigger('click')
-
-    expect(wrapper.text()).toBe('1')
-  })
-          `}
-          />
-            <Notes>
-                A much better solution is to exercise the code in the click handler and then test the result.
-                This is the same as our fibR example -- its not particularly interesting that we call the
-                handler with the right arguments internally; its interesting that we produce the correct DOM.
-                This goes back to the idea that we should think of components as pure functions from props to
-                DOM.
-            </Notes>
+          <Heading>Don't test Vue internals</Heading>
+          <CodePane language="javascript" highlightRanges={[[1, 3], [5, 9], [11, 14], [16, 19]]}>{vueInternals}</CodePane>
         </Slide>
         <Slide>
-            <Heading size={4}>Spies</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<div>
-  <button class="button__primary" @click="clickHandler">Click Me!</p>
-</div>
-</template>
-
-<script>
-export default {
-  name: 'PrimaryButton',
-  props: {
-    onclick: {
-        type: Object
-    }
-  },
-  methods: {
-      click() {
-          this.onclick()
-      }
-  },
-}
-</script>
-  test('increments correctly', () => {
-    const clickSpy = jest.spy()
-    const wrapper = mount(PrimaryButton, { onclick: clickSpy})
-    wrapper.find('button').trigger('click')
-
-    expect(clickSpy).toHaveBeenCalled()
-  })
-          `}
-          />
-            <Notes>
-                So what do we use spies for, then? Spies are useful when a prop is a function.
-                It allows us to check that the callback was executed with the arguments that we
-                expect, since passing arguments to a callback is part of our contract with our
-                clients; part of our output.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Spies</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<div>
-  <p>{{ value }}</p>
-  <button class="button__primary" @click="clickHandler">Click Me!</p>
-</div>
-</template>
-
-<script>
-import ApiService from '../../js/services/ApiService';
-export default {
-  name: 'PrimaryButton',
-  methods: {
-      click() {
-          ApiService.recordClick().then(resp => this.value = resp)
-      }
-  },
-  data() {
-      return {
-        value: 0
-      }
-  }
-}
-</script>
-  test('increments correctly', () => {
-    const returnValue = 42
-    const recordClickSpy = jest.spyOn(ApiService.methods, 'recordClick').mockReturnValue(returnValue)
-    const wrapper = mount(PrimaryButton)
-    wrapper.find('button').trigger('click')
-
-    expect(recordClickSpy).toHaveBeenCalled()
-    expect(wrapped.find('p').text()).toBe(returnValue)
-  })
-          `}
-          />
-            <Notes>
-                So what else do we use spies for, then? Spies are useful when there are side-effects.
-                The line between what is output and what is a side-effect can be somewhat blurry at
-                times, but the network and console output are both canonical examples of side-effects.
-                We have to spy on the ApiService because it can't make real network calls. We do,
-                however, need to test that the processing of the response is correct, so we need to
-                mock the return value and validate that it has been handled properly by the component.
-            </Notes>
-        </Slide>
-        <Slide>
-            <Heading size={4}>Emitted events</Heading>
-            <CodePane lang="javascript" source={`
-<template>
-<button class="button__primary" @click="clickHandler">Click me!</button>
-</template>
-
-<script>
-export default {
-  name: 'PrimaryButton',
-
-  methods: { 
-    clickHandler() {
-      this.$emit('click', 'value-one', 'value-two')
-    }
-  }
-}
-</script>
-  test('increments correctly', () => {
-    const wrapper = mount(PrimaryButton)
-    wrapper.find('button').trigger('click')
-
-    const { click } = wrapper.emitted()
-    // wrapper.vm.emitEvent() ???
-
-    expect(click[0]).toBe('value-one')
-    expect(click[1]).toBe('value-two')
-  })
-          `}
-          />
+            <Heading>Emitted events</Heading>
+            <CodePane language="javascript" highlightRanges={[[1, 3], [5, 15], [17, 26]]}>{emittedEvent}</CodePane>
             <Notes>
                 Emitted events are also part of our contract with our clients, part of our API, so
                 we need to test them as well. Here's a quick example. Note that we can directly
@@ -539,7 +286,26 @@ export default {
             </Notes>
         </Slide>
         <Slide>
-          <Heading>Mock the network</Heading>
+          <Heading>find vs findComponent</Heading>
+          <CodePane language="javascript">{`
+import Bar from '@components/Bar'
+
+test('selects ', () => {
+  const component = mountMyComponent()
+
+  const foo = component.find('#foo') // if you must
+  const bar = component.findComponent(Bar) // preferred
+})
+          `}</CodePane>
+        </Slide>
+        <Slide>
+          <Heading>Test Warnings</Heading>
+          <FlexBox alignItems="center" justifyContent="center">
+            <Image src={testWarnings} width={"45%"}/>
+          </FlexBox>
+        </Slide>
+        <Slide>
+          <Heading>Questions?</Heading>
         </Slide>
       </Deck>
     );

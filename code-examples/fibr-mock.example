@@ -1,0 +1,23 @@
+const fibR = (n, memo) => {
+  if (memo[n]) {
+    return memo[n]
+  }
+  memo[n] = fib(n-1, memo) + fib(n-2, memo)
+  return memo[n]
+}
+
+const fib = (n) => {
+    return fibR(n, [0,1])
+}
+export default { fib }
+
+test('should calculate fibonacci numbers', () => {
+  expect(fib(5)).toBe(8)
+})
+
+test('should test with mocks', () => {
+  const fibRSpy = jest.spyOn(fibR)
+  fib(5)
+    
+  expect(fibRSpy).toHaveBeenCalled()
+})

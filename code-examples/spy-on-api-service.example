@@ -1,0 +1,33 @@
+<template>
+<div>
+  <p>{{ value }}</p>
+  <button class="button__primary" @click="clickHandler">Click Me!</p>
+</div>
+</template>
+
+<script>
+import ApiService from '../../js/services/ApiService';
+export default {
+  name: 'PrimaryButton',
+  methods: {
+      click() {
+          ApiService.recordClick().then(resp => this.value = resp)
+      }
+  },
+  data() {
+      return {
+        value: 0
+      }
+  }
+}
+</script>
+
+test('increments correctly', () => {
+  const returnValue = 42
+  const recordClickSpy = jest.spyOn(ApiService.methods, 'recordClick').mockReturnValue(returnValue)
+  const wrapper = mount(PrimaryButton)
+  wrapper.find('button').trigger('click')
+
+  expect(recordClickSpy).toHaveBeenCalled()
+  expect(wrapped.find('p').text()).toBe(returnValue)
+})

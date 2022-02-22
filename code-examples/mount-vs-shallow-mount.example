@@ -1,0 +1,23 @@
+<template>
+<div>
+  <child-component msg="I'm a child" />
+  <p>I'm a parent</p>
+</div>
+</template>
+
+<script>
+import ChildComponent from './ChildComponent'
+
+export default {
+  name: 'ParentComponent',
+  components: { ChildComponent },
+}
+</script>
+
+test('renders correctly', () => {
+  //const wrapper = mount(ParentComponent) ???
+  //const wrapper = shallowMount(ParentComponent) ???
+
+  expect(wrapper.text()).toContain("I'm a parent")
+  //expect(wrapper.text()).toContain("I'm a child") this fails
+})
