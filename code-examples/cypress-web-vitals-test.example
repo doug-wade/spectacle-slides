@@ -1,0 +1,10 @@
+describe('course catalog', () => {
+  it('should pass the performance audit', () => {
+    cy.visit(`${context.target}/course/`);
+
+    cy.lighthouse({
+      "first-contentful-paint": 1000,
+      "largest-contentful-paint": 1000,
+    });
+  });
+})
