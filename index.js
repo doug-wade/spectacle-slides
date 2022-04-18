@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Presentation from "./presentation/unit-testing-in-vue";
+import Presentation from "./presentation/debugging-javascript";
 
 ReactDOM.render(<Presentation />, document.getElementById("root"));
