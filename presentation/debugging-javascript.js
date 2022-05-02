@@ -37,7 +37,9 @@ export default class Presentation extends React.Component {
       <Deck theme={theme}>
         <Slide>
           <Heading>Debugging Javascript</Heading>
-          <Text>What to do when you don't know what to do</Text>
+          <FlexBox alignItems="center" justifyContent="center">
+            <Text>What to do when you don't know what to do</Text>
+          </FlexBox>
         </Slide>
         <Slide>
           <Heading>The console global</Heading>
@@ -45,16 +47,6 @@ export default class Presentation extends React.Component {
             {`
 console.log('foo');
 console.log('foo', { bar: 'baz' });
-          `}
-          </CodePane>
-        </Slide>
-        <Slide>
-          <Heading>console.log and friends</Heading>
-          <CodePane language="javascript">
-            {`
-console.log('foo');
-console.warn('foo', { bar: 'baz' });
-console.error('foo', new Error('this is a message'));
           `}
           </CodePane>
         </Slide>
@@ -117,6 +109,14 @@ console.trace(new Error())
           </CodePane>
         </Slide>
         <Slide>
+          <Heading>console.dir</Heading>
+          <CodePane language="javascript">
+            {`
+console.dir({ bar: 'bar', deeply: { nested: { value: 'foo' }}})
+          `}
+          </CodePane>
+        </Slide>
+        <Slide>
           <Heading>console groups</Heading>
           <CodePane language="javascript">
             {`
@@ -140,6 +140,7 @@ console.log('Back to the outer level')
           <Heading>Debugger keyword</Heading>
           <CodePane language="javascript">
             {`
+const quux = 'quux'
 console.log('foo')
 debugger
 console.log('bar')
@@ -160,13 +161,13 @@ console.log('bar')
           <Notes>Use dashboard.js since it has source maps</Notes>
         </Slide>
         <Slide>
-          <Heading>Bonus! const rebinds in console</Heading>
+          <Heading>const rebinds in console</Heading>
           <FlexBox alignItems="center" justifyContent="center">
             <Image src={breakpointRebinds} width="75%" />{" "}
           </FlexBox>
         </Slide>
         <Slide>
-          <Heading>Bonus! overrides folder</Heading>
+          <Heading>Overrides folder</Heading>
         </Slide>
         <Slide>
           <Heading>Open Overrides Tab</Heading>
