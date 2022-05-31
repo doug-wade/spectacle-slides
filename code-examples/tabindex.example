@@ -1,0 +1,2 @@
+<div tabindex="0">Click me!</div>
+<div tabindex="-1">Don't click me!</div>

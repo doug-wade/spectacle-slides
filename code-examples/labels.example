@@ -1,0 +1,5 @@
+<!-- Don't -->
+<span>Do you option?</span><input type="checkbox" />
+
+<!-- Do -->
+<label>Do you option?<input type="checkbox" /></label>

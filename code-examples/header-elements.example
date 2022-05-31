@@ -1,0 +1,8 @@
+<!-- Only one h1! -->
+<h1>I'm the page header!</h1>
+
+<h2>First subsection</h2>
+<h3>Support the first subsection</h3>
+
+<h2>Second subsection</h2>
+<h3 class="small-header">Semantics !== Style</h3>

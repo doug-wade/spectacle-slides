@@ -1,0 +1,7 @@
+<!-- Don't -->
+<div onclick="() => alert(0)">I'm a button???</div>
+<div class="progressbar" />
+
+<!-- Do -->
+<button onclick="() => alert(0)">I'm a button</button>
+<progress class="progressbar" />

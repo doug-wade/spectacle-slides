@@ -1,0 +1,7 @@
+<!-- Don't -->
+<button onclick="() => window.location = 'www.skilljar.com'">I'm a button</button>
+<a href="#" onclick="() => alert(0)">I'm a link</a>
+
+<!-- Do -->
+<button onclick="() => alert(0)">I'm a button</button>
+<a href="www.skilljar.com">I'm a link</a>

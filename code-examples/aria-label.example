@@ -1,0 +1,5 @@
+<!-- Don't -->
+<button class="hambutt" />
+
+<!-- Do -->
+<button class="hambutt" aria-label="A button for opening and closing the main navigation" />

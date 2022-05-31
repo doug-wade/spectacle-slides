@@ -1,0 +1,7 @@
+<!-- Don't -->
+<button>I'm a button!</button>
+<select>I'm a select!</button>
+
+<!-- Do -->
+<sj-button>I'm a button!</sj-button>
+<sj-select>I'm a select!</sj-select>
