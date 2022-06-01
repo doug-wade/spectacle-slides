@@ -9,6 +9,7 @@ import {
   Heading,
   Image,
   ListItem,
+  Notes,
   Stepper,
   Slide,
   Text,
@@ -69,6 +70,11 @@ export default class Presentation extends React.Component {
             Accessibility is making a website usuable by as many people as
             possible.
           </Text>
+          <Notes>
+            This includes blind people, colorblind people, people using mouth
+            sticks, people with arthritis, people missing arms, people with
+            limited bandwidth, people on mobile, people using voice-to-text
+          </Notes>
         </Slide>
         <Slide>
           <Heading>Why Accessibility?</Heading>
@@ -93,6 +99,13 @@ export default class Presentation extends React.Component {
               }
             </Stepper>
           </UnorderedList>
+          <Notes>
+            Our mission is to bring education to everyone, and that requires
+            a11y. There is the ADA, and one of my partner's previous companies
+            was sued for non-compliance. When you build with a11y in mind, you
+            are more likely to use the platform, and write websites that are
+            usable for abled people
+          </Notes>
         </Slide>
         <Slide>
           <Heading>Ancedata</Heading>
@@ -119,6 +132,13 @@ export default class Presentation extends React.Component {
               }
             </Stepper>
           </UnorderedList>
+          <Notes>
+            Remember that one time that Cujo couldn't use his laptop because his
+            mouse broke? Remember that one time you had to hold Mochi because
+            she was afraid of a skateboarder and you wanted to text Carey?
+            Remember that one time Carey almost couldn't schedule a carpet
+            cleaner without their a11y features?
+          </Notes>
         </Slide>
         <Slide>
           <Heading>Accessibility is our responsibility!</Heading>
@@ -130,6 +150,10 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Heading>Accessibility Standards</Heading>
+          <Notes>
+            The WCAG publishes a11y standards at three levels. We'll talk about
+            the top two tiers
+          </Notes>
         </Slide>
         <Slide>
           <Heading>Perceivable</Heading>
