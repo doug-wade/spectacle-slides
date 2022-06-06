@@ -1,0 +1,20 @@
+<template>
+  <DataTable :data="data">
+    <template #paginator>
+      <Paginator v-model="paginator" />
+    </template>
+  </DataTable>
+</template>
+
+<script setup>
+import { useDataTablePaginator, useDataTableApiMethod } from '@/composables/DataTable'
+
+const { paginator } = useDataTablePagination({
+  perPageOptions: [10, 25, 50, 75, 100]
+})
+
+const { data } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable,
+  paginator,
+})
+</script>

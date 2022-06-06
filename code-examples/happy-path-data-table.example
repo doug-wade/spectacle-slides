@@ -1,0 +1,28 @@
+<template>
+  <ApiDataTable
+    :columns="columns"
+    :is-paginated="true"
+    :is-searchable="true"
+    :api-endpoint="https://api.skilljar.com/example"
+    :filters="filters"
+  >
+    <template #filters>
+      <div>
+        <DataChartSelectFilter 
+          v-model="filters.example" 
+          :provider="provider" 
+        />
+      </div>
+    </template>
+  </ApiDataTable>
+</template>
+
+<script setup>
+const columns = [{
+  title: 'Example',
+  key: 'example',
+  sortable: true
+}]
+const { filters } = useDataTableFilters({ columns })
+const { provider } = new StaticDataProvider([ 'one', 'two' ])
+</script>

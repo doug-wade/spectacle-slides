@@ -1,0 +1,13 @@
+<template>
+  <DataTable :columns="columns" :data="data" />
+</template>
+
+<script setup>
+import MyCell from './MyCell'
+
+const columns = [
+  { title: 'Example', key: 'example', component: MyCell },
+  { title: 'Other', key: 'other' }
+]
+const data = { count: 1, results: [{ example: { myHref: '...', ariaLabel: '...' }, other: 12 }] }
+</script>

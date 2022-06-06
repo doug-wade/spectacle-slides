@@ -1,0 +1,5 @@
+class Example {
+  static dataTable(params) {
+    return Request.dataTableHelper('https://api.skilljar.com/example', params);
+  }
+}

@@ -1,0 +1,11 @@
+<template>
+  <DataTable :data="data" :loading-state="loadingState" :error="error"></DataTable>
+</template>
+
+<script setup>
+import { useDataTableApiMethod } from '@/composables/DataTable'
+
+const { data, error, loadingState } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable
+})
+</script>

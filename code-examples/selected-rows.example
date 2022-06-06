@@ -1,0 +1,14 @@
+<template>
+  <div>
+    <DataTable :data="data" @select-row="selectRow" :selected-rows="selectedRows" />
+    <Button onclick="postSelectedRows">Post Selected Rows</Button>
+  <div>
+</template>
+
+<script setup>
+const { data } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable 
+})
+const { selectRow, selectedRows } = useDataTableRowSelector({ data })
+const postSelectedRows = () => { ApiService.Example.postSelectedRows(selectedRows) }
+<script>

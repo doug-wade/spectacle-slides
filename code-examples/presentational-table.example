@@ -1,0 +1,14 @@
+<template>
+  <Table>
+    <template #header>
+      <TableHeader>
+        <TableRow>{{ label }}</TableRow>
+      </TableHeader>
+    </template>
+    <template #body>
+      <TableBody>
+        <TableRow>{{ value }}</TableRow>
+      </TableBody>
+    </template>
+  </Table>
+</template>

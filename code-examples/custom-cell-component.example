@@ -1,0 +1,12 @@
+<template>
+  <DataTableCell>
+    <SecondaryIcon :href="myHref" :aria-label="ariaLabel" />
+  </DataTableCell>
+</template>
+
+<script setup>
+const { ariaLabel, myHref } = defineProps({
+  ariaLabel: 'string',
+  myHref: 'string',
+})
+</script>

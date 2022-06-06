@@ -1,0 +1,15 @@
+<template>
+  <DataTable :data="data">
+    <slot #csv>
+      <DataTableCSVDownloadButton @click="downloadCSV" />
+    </slot>
+  </DataTable>
+</template>
+
+<script setup>
+import { DataTable, DataTableCSVDownloadButton } from '@/components/DataTable'
+
+const { data, downloadCSV } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable 
+});
+</script>

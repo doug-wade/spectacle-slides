@@ -1,0 +1,12 @@
+<template>
+  <div>
+    <DataTable v-if="isDataTable" :data="data" :error="error" :loading-state="loadingState" />
+    <DataChart v-else :data="data" :error="error" :loading-state="loadingState" />
+  </div>
+</template>
+
+<script setup>
+const { data, error, loadingState } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable
+})
+</script>
