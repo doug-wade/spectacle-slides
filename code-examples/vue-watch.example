@@ -1,0 +1,12 @@
+<script>
+export default {
+  data() {
+    return { searchResults: [], q: '' }
+  },
+  watch: {
+    q() {
+      fetch(this.searchEndpoint + `?q=${this.q}`).then(data => this.searchResults = data);
+    },
+  },
+}
+</script>
