@@ -6,6 +6,7 @@ import {
   Heading,
   ListItem,
   Slide,
+  Text,
   UnorderedList,
 } from "spectacle";
 
@@ -18,6 +19,8 @@ const theme = {
   },
 };
 
+const dataComputedMethods =
+  require("raw-loader!../code-examples/data-computed-methods.example").default;
 const sjButton =
   require("raw-loader!../code-examples/sj-button.example").default;
 const vueData = require("raw-loader!../code-examples/vue-data.example").default;
@@ -45,7 +48,7 @@ export default class Presentation extends React.Component {
               [16, 20],
             ]}
           >
-            {mountVsShallowMount}
+            {dataComputedMethods}
           </CodePane>
         </Slide>
         <Slide>
@@ -57,6 +60,7 @@ export default class Presentation extends React.Component {
           <UnorderedList>
             <ListItem>Stores local data</ListItem>
             <ListItem>Reactive</ListItem>
+            <ListItem>Cached</ListItem>
             <ListItem>No side effects</ListItem>
           </UnorderedList>
         </Slide>
@@ -69,6 +73,7 @@ export default class Presentation extends React.Component {
           <UnorderedList>
             <ListItem>Computes local data from other properties</ListItem>
             <ListItem>Reactive</ListItem>
+            <ListItem>Cached</ListItem>
             <ListItem>No side effects (please)</ListItem>
           </UnorderedList>
         </Slide>
@@ -81,8 +86,13 @@ export default class Presentation extends React.Component {
           <UnorderedList>
             <ListItem>Does NOT store data</ListItem>
             <ListItem>Reactive</ListItem>
+            <ListItem>Cached</ListItem>
             <ListItem>Side effects</ListItem>
           </UnorderedList>
+        </Slide>
+        <Slide>
+          <Heading>Watch</Heading>
+          <Text>Deep watching and arguements to watch</Text>
         </Slide>
         <Slide>
           <Heading>Method</Heading>
@@ -93,6 +103,7 @@ export default class Presentation extends React.Component {
           <UnorderedList>
             <ListItem>Does NOT store data</ListItem>
             <ListItem>NOT Reactive</ListItem>
+            <ListItem>NOT cached</ListItem>
             <ListItem>Side effects</ListItem>
           </UnorderedList>
         </Slide>
@@ -111,6 +122,7 @@ export default class Presentation extends React.Component {
           <UnorderedList>
             <ListItem>Finding current uses</ListItem>
             <ListItem>Looking at the props</ListItem>
+            <ListItem>Vue Dev Tools for existing DOM elements</ListItem>
           </UnorderedList>
         </Slide>
         <Slide>
@@ -120,6 +132,9 @@ export default class Presentation extends React.Component {
         <Slide>
           <Heading>Looking at the props</Heading>
           <CodePane language="javascript">{vueProps}</CodePane>
+        </Slide>
+        <Slide>
+          <Heading>Questions or comments?</Heading>
         </Slide>
       </Deck>
     );
