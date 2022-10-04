@@ -1,0 +1,16 @@
+import { mount } from '@test-utils/web-component-rendering';
+
+test('emits click event when the icon is clicked', async () => {
+  // Arrange
+  const myProp = 'example';
+  const clickMock = jest.fn();
+
+  // Act
+  const elem = await mount({ tag: 'sj-example', attributes: { myProp } });
+  elem.addEventListener('click', clickMock);
+  elem.click();
+
+  
+  expect(clickMock).toHaveBeenCalled();
+  expect(elem.firstChild.classList).toContain(myProp);
+});

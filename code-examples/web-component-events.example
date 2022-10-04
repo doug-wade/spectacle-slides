@@ -1,0 +1,20 @@
+export default class Example extends HTMLElement {
+  #rootElement;
+
+  constructor() {
+    super();
+    this.#rootElement = document.createElement('sj-icon');
+  }
+
+  connectedCallback() {
+    this.#rootElement.addEventListener('click', this.#onExample);
+  }
+
+  disconnectedCallback() {
+    this.#rootElement.removeEventListener('click', this.#onExample);
+  }
+
+  #onExample() {
+    this.#rootElement.dispatchEvent(new CustomEvent('example'));
+  }
+}
