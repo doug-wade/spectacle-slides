@@ -1,0 +1,18 @@
+class Example extends HTMLElement {
+  constructor() {
+    super();
+
+    const shadow = this.attachShadow({ mode: "open" }); // also, mode: "closed"
+
+    const wrapper = document.createElement("span");
+    wrapper.innerText = 'Hello World!';
+
+    const style = document.createElement("style");
+    style.textContent += `.wrapper { color: rebeccapurple }`;
+
+    shadow.appendChild(style);
+    shadow.appendChild(wrapper);
+  }
+}
+
+customElements.define("example", Example);

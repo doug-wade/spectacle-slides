@@ -44,6 +44,11 @@ const api =
   require("raw-loader!../code-examples/web-component-api.example").default;
 const unitTest =
   require("raw-loader!../code-examples/web-component-unit-test.example").default;
+const shadowDOM =
+  require("raw-loader!../code-examples/shadow-dom.example").default;
+const template =
+  require("raw-loader!../code-examples/template.example").default;
+const slot = require("raw-loader!../code-examples/slot.example").default;
 
 export default class Presentation extends React.Component {
   render() {
@@ -130,6 +135,36 @@ export default class Presentation extends React.Component {
           >
             {events}
           </CodePane>
+        </Slide>
+        <Slide>
+          <Heading>Shadow DOM</Heading>
+          <CodePane
+            language="javascript"
+            highlightRanges={[
+              [5, 5],
+              [7, 8],
+              [10, 11],
+              [13, 14],
+            ]}
+          >
+            {shadowDOM}
+          </CodePane>
+        </Slide>
+        <Slide>
+          <Heading>Templates</Heading>
+          <CodePane
+            language="javascript"
+            highlightRanges={[
+              [5, 10],
+              [12, 13],
+            ]}
+          >
+            {template}
+          </CodePane>
+        </Slide>
+        <Slide>
+          <Heading>Slots</Heading>
+          <CodePane language="html">{slot}</CodePane>
         </Slide>
         <Slide>
           <Heading>How do I style a web component?</Heading>
