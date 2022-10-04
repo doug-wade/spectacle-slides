@@ -1,0 +1,9 @@
+<script>
+export default {
+  methods: {
+    clickHandler() {
+      console.log('button clicked!');
+    }
+  }
+}
+</script>

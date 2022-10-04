@@ -1,0 +1,7 @@
+:root {
+  --icon-color: var(--color-geysergrey);
+}
+
+sj-lesson-icon {
+  --icon-active-color: var(--color-blue);
+}

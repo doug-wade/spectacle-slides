@@ -1,0 +1,17 @@
+class Example extends HTMLElement {
+  constructor() {
+    super();
+
+    const template = document.createElement(`
+      <template>
+        <span>Slotted content:</span>
+        <slot name="example-slot">DEFAULT VALUE</slot>
+      </template>
+    `).content;
+    
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.cloneNode(true));
+  }
+}
+
+customElements.define("example-element", Example);

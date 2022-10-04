@@ -1,0 +1,22 @@
+<script>
+export default {
+  data() {
+    return { foo: 'foo' }
+  },
+  computed: {
+    bar() {
+      return this.foo + 'bar'
+    }
+  },
+  watch: {
+    baz() {
+      this.quux = this.foo + 'baz';
+    }
+  },
+  method: {
+    quuz() {
+      this.foo = 'corge'
+    }
+  }
+}
+</script>

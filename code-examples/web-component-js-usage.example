@@ -1,0 +1,4 @@
+const elem = document.createElement('sj-example');
+elem.setAttribute('example-attribute', 'example value');
+elem.addEventListener('example-event', () => console.log('An example event occurred'));
+document.body.appendChild(elem);

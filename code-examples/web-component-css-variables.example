@@ -1,0 +1,7 @@
+:root {
+  --example-color: rebeccapurple;
+}
+
+sj-example {
+  color: var(--example-color);
+}

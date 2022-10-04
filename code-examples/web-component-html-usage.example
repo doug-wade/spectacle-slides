@@ -1,0 +1,4 @@
+<sj-lesson-type-icon
+  type="PDF"
+  style="--icon-color: var(--color-blue)"
+></sj-lesson-type-icon>

@@ -1,0 +1,27 @@
+export default class Example extends HTMLElement {
+  #example;
+
+  static get observedAttributes() {
+    return ['example'];
+  }
+
+  constructor() {
+    super();
+    // Per the spec: don't access the attribute here
+  }
+
+  connectedCallback() {
+    this.updateAttribute(this.getAttribute('example'));
+    this.appendChild(this.#rootElement);
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'example') {
+      this.updateAttribute(newValue);
+    }
+  }
+
+  updateAttribute(newValue) {
+    this.#example = newValue;
+  }
+}

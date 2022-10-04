@@ -1,0 +1,5 @@
+<template>
+  <sj-button :variant="BUTTON_VARIANTS.SECONDARY" :disabled="addActionButtonInfo.disabled" @click="addAction">
+    {{ addActionButtonInfo.text }}
+  </sj-button>
+</template>

@@ -1,0 +1,10 @@
+<script>
+export default {
+  props: ['firstName', 'lastName']
+  computed: {
+    name() {
+      return this.firstName + ' ' + this.lastName
+    }
+  },
+}
+</script>

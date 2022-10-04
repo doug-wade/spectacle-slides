@@ -1,0 +1,10 @@
+export default class Example extends HTMLElement {
+  static get observedAttributes() { return [] } 
+
+  constructor() {}
+
+  connectedCallback() {}
+  attributeChangedCallback(name, oldValue, newValue) {}
+  disconnectedCallback() {}
+  adoptedCallback() {}
+}
