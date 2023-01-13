@@ -1,0 +1,7 @@
+import { withLevel, withMessage, required } from '@tybalt/validator'
+
+defineComponent({
+  props: {
+    myExample: withMessage(withLevel(required, 'warning'), "the prop myExample is encouraged, but not required")
+  }
+})

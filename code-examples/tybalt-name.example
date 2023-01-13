@@ -1,0 +1,5 @@
+import { defineComponent } from '@tybalt/core'
+
+defineComponent({
+  name: 'sjwc-example-component'
+})

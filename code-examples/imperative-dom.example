@@ -1,0 +1,6 @@
+export default class MyComponent extends HTMLElement {
+  connectedCallback() {
+    const myChild = this.getElement('sjwc-icon');
+    myChild.setAttribute('name', 'fa fa-beer');
+  }
+}

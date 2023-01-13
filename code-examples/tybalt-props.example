@@ -1,0 +1,12 @@
+import { defineComponent } from '@tybalt/core'
+import { string } from '@tybalt/validator'
+
+defineComponent({
+  name: 'sjwc-example-component',
+  props: {
+    name: {
+      validator: string(),
+      default: 'World'
+    }
+  }
+})

@@ -1,0 +1,9 @@
+import { mount } from '@tybalt/test-utils';
+
+it('should render a primary button by default', async () => {
+    const wrapper = await mount(Button);
+
+    const button = wrapper.find('button');
+
+    expect(button.classes('button-primary')).toBeTruthy();
+});

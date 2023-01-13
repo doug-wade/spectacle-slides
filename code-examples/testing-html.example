@@ -1,0 +1,9 @@
+it('renders slotted content', async () => {
+    const mockSlot = 'mock slot value'
+    const wrapper = await mount(Link, {
+        slot: mockSlot,
+        attributes: { href },
+    });
+
+    expect(wrapper.html()).toContain(mockSlot);
+});

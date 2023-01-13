@@ -1,0 +1,8 @@
+import { defineComponent, html } from '@tybalt/core'
+
+defineComponent({
+  name: 'sjwc-example-component',
+  render() {
+    return html`<div>Hello World!</div>`
+  }
+})

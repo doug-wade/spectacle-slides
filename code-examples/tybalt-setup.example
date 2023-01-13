@@ -1,0 +1,10 @@
+import { defineComponent, html } from '@tybalt/core'
+
+defineComponent({
+  name: 'sjwc-example-component',
+  setup() {
+    return {
+      myRenderProp: 'foo bar baz quux'
+    }
+  }
+})

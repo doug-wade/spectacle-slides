@@ -1,0 +1,32 @@
+const attributes = {
+  exampleProp: 'example-prop',
+};
+
+export default class MyComponent extends HTMLElement {
+  static get observedAttributes() {
+    return Object.values(attributes);
+  }
+
+  constructor() {
+    super();
+
+    const exampleProp = this.getAttribute(attributes.exampleProp);
+    if (exampleProp) {
+      this.#rootElement.classList.add(...exampleProp.split(' '));
+    }
+  }
+
+  connectedCallback() {
+    this.updateName(this.getAttribute(attributes.exampleProp));
+  }
+
+  attributeChangedCallback(exampleProp, oldValue, newValue) {
+    if (exampleProp === attributes.exampleProp) {
+      this.updateName(newValue, oldValue);
+    }
+  }
+
+  updateName(newValue, oldValue) {
+    // do something with exampleProp
+  }
+}
