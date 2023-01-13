@@ -1,0 +1,38 @@
+import { defineComponent } from '@tybalt/core'
+import { compose, required, string } from '@tybalt/validator'
+
+const getGreetingFromName = (localName) => {
+  const currentHour = (new Date()).getHours();
+  
+  if (currentHour > 18) {
+    return `Good evening ${localName}`;
+  } else if (currentHour > 12) {
+    return `Good afternoon ${localName}`;
+  } else {
+    return `Good morning ${localName}`;
+  }
+}
+
+defineComponent({
+  name: 'sjwc-hello-sayer',
+  shadowMode: 'open',
+  props: {
+    name: {
+      validator: compose(string(), required()),
+      default: 'World'
+    }
+  },
+  setup({ name }) {
+    return {
+      greeting: name.pipe(map(getGreetingFromName))
+    }
+  },
+  css: `
+    .sjwc-greeting-wrapper {
+      color: rebeccapurple;
+    }
+  `,
+  render({ greeting }) {
+    return html`<div class="sjwc-greeting-wrapper">${greeting}</div>`
+  }
+})

@@ -1,0 +1,15 @@
+import { defineComponent, html } from '@tybalt/core'
+
+defineComponent({
+    name: 't-switch-example',
+    props: { condition: {} },
+    render({ condition }) {
+        return html`
+            <t-switch value="${condition}">
+                <div slot="foo">do something foo-ish</div>
+                <div slot="bar">a bar thing happens here</div>
+                <div slot="baz">baz it up</div>
+            </t-switch>
+        `;
+    }
+});

@@ -1,0 +1,7 @@
+{
+  "name": "my-workspaces-powered-project",
+  "workspaces": [
+    "workspace-a",
+    "workspace-b"
+  ]
+}

@@ -1,0 +1,10 @@
+import { defineComponent } from '@tybalt/core'
+
+defineComponent({
+  name: 'sjwc-example-component',
+  css: `
+    .my-class {
+      font-family: Papyrus;
+    }
+  `
+})

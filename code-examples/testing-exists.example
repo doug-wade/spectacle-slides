@@ -1,0 +1,7 @@
+import { mount } from '@tybalt/test-utils'
+
+it('mounts', async () => {
+  const wrapper = mount(MyComponent)
+
+  expect(wrapper.exists()).toBeTruthy()
+})

@@ -1,0 +1,10 @@
+import { mount } from '@tybalt/test-utils';
+
+it('renders a link', async () => {
+    const mockHref = 'http://www.example.com';
+    const wrapper = await mount(MyComponent, { attributes: { href: mockHref } });
+
+    const actual = wrapper.find('a');
+
+    expect(actual.attributes('href')).toBe(mockHref);
+});

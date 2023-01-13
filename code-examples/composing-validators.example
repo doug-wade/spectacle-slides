@@ -1,0 +1,7 @@
+import { compose, string, required } from '@tybalt/validator'
+
+defineComponent({
+  props: {
+    myExample: compose(required(), string())
+  }
+})
