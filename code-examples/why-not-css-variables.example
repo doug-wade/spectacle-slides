@@ -1,0 +1,7 @@
+/* var() requires an element, but env() does not */
+:root {
+  --breakpoint: 600px;
+}
+
+/* var can't be used here, but env() can */
+@media (min-width: var(--breakpoint)) {}
