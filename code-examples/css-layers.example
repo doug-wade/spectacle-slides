@@ -1,0 +1,13 @@
+@layer system, defaults, utilities;
+
+@layer utilities {
+  .course-tile { 
+    color: bisque;
+  }
+}
+
+@layer defaults {
+  .course-tile { 
+    color: rebeccapurple; 
+  }
+}

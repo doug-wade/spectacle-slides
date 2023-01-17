@@ -1,0 +1,5 @@
+@media (max-width: env(--brand-small)) {
+  body {
+    padding: env(--brand-spacing);
+  }
+}

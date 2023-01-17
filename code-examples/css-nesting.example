@@ -1,0 +1,18 @@
+table.colortable {
+  & td {
+    text-align: center;
+
+    &.c {
+      text-transform:uppercase;
+    }
+  }
+}
+
+/* is the equivalent of */
+table.colortable td {
+  text-align:center;
+}
+
+table.colortable td.c {
+  text-transform:uppercase;
+}

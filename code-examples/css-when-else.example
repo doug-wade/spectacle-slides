@@ -1,0 +1,30 @@
+@when media(width >= 640px) and (supports(display: flex) or supports(display: grid)) {
+  /* A */
+} @else media(pointer: coarse) {
+  /* B */
+} @else {
+  /* C */
+}
+
+/* is the equivalent of */
+@media (width >= 400px) and (pointer: fine) {
+  @supports (display: flex) {
+    /* A */
+  }
+  @supports not (display: flex) {
+    @supports (caret-color: pink) and (background: double-rainbow()) {
+      /* B */
+    }
+    @supports not ((caret-color: pink) and (background: double-rainbow())) {
+      /* C */
+    }
+  }
+}
+@media not ((width >= 400px) and (pointer: fine)) {
+  @supports (caret-color: pink) and (background: double-rainbow()) {
+    /* B */
+  }
+  @supports not ((caret-color: pink) and (background: double-rainbow())) {
+    /* C */
+  }
+}

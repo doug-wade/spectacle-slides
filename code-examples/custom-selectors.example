@@ -1,0 +1,5 @@
+@custom-selector :--course-tile div.course-tile div.new-course-tile;
+
+:--course-tile {
+  outline: rebeccapurple;
+}
