@@ -1,0 +1,9 @@
+class CustomCatalogTile extends HTMLElement {
+  connectedCallback() {
+    const catalogTile = document.createElement('skilljar-catalog-tile');
+    const customSash = document.createElement('span');
+    catalogTile.appendChild(customSash);
+    this.appendChild(catalogTile);
+  }
+}
+customElements.define('custom-catalog-tile', CustomCatalogTile);

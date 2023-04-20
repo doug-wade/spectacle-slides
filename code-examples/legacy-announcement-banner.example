@@ -1,0 +1,27 @@
+<div class="catalog-header custom-header">
+  <div class="homepage-ch-container">
+    <div class="homepage-ch-title">
+      <h1>Reddit Mod Education</h1>
+    </div>
+    <div class="homepage-ch-text">
+      <p>Courses, skill training, and tips for community builders.</p>
+    </div>
+    <div class="search-container" role="search">
+      <div id="catalog-search-box" class="catalog-search-input-group">
+        <input id="catalogSearchInput" type="text" value="" class="catalog-search-input" placeholder="Search" aria-label="Search">
+        <span class="catalog-search-input-button-wrapper">
+          <button class="catalog-search-input-button" type="button" title="Search" aria-labelledby="catalogSearchInput">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <style>
+      .catalog-header {
+        background: url('...')
+      }
+    </style>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+class StyledButton extends HTMLElement {
+  connectedCallback() {
+    this.dispatchEvent(
+      new ContextEvent(
+        window.skilljarThemeContext,
+        (skilljarTheme) => {
+          this.buttonColor = skilljarTheme.buttonColor;
+        }
+      )
+    );
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <style>
+        button { background-color: ${this.buttonColor} }
+      </style>
+      <button>my button</button>
+    `;
+    this.appendChild(wrapper);
+  }
+}
+customElements.define('styled-button', StyledButton);
