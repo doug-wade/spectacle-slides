@@ -39,8 +39,10 @@ const theme = {
 import butWhy from "../assets/but-why.gif";
 import cssBoxModel from "../assets/css-box-model.png";
 import breakingChange from "../assets/cp-breaking-change.png";
+import headerHtmlInput from "../assets/header-html-input.png";
 import htmlBoxes from "../assets/html-boxes.drawio.png";
 import mdnWebComponentDocs from "../assets/mdn-web-component-docs.png";
+import pageBuilderComposer from "../assets/page-builder-composer.png";
 import shadowDom from "../assets/shadow-dom.jpg";
 import skilljarLogo from "../assets/skilljar_logo.svg";
 import themeInput from "../assets/theme-input.png";
@@ -80,6 +82,13 @@ export default class Presentation extends React.Component {
           <FlexBox alignItems="center" justifyContent="center">
             <Image src={skilljarLogo} width="40%" />
           </FlexBox>
+        </Slide>
+        <Slide>
+          <Heading>Hi I'm Doug!</Heading>
+          <UnorderedList>
+            <ListItem>On the Frontend team</ListItem>
+            <ListItem>At Skilljar two years</ListItem>
+          </UnorderedList>
         </Slide>
         <Slide>
           <Heading>Agenda</Heading>
@@ -307,6 +316,18 @@ export default class Presentation extends React.Component {
             All custom components from page builder will be available on
             "legacy" pages for reuse.
           </Text>
+        </Slide>
+        <Slide>
+          <FlexBox alignItems="center" justifyContent="center">
+            <div>
+              <Text>"Legacy" pages</Text>
+              <Image src={headerHtmlInput} width="50%" />
+            </div>
+            <div>
+              <Text>Builder pages</Text>
+              <Image src={pageBuilderComposer} width="100%" />
+            </div>
+          </FlexBox>
         </Slide>
         <Slide>
           <Heading>
