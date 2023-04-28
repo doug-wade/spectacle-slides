@@ -40,6 +40,7 @@ import butWhy from "../assets/but-why.gif";
 import cssBoxModel from "../assets/css-box-model.png";
 import breakingChange from "../assets/cp-breaking-change.png";
 import headerHtmlInput from "../assets/header-html-input.png";
+import htmlBlock from "../assets/html-blocks.png";
 import htmlBoxes from "../assets/html-boxes.drawio.png";
 import mdnWebComponentDocs from "../assets/mdn-web-component-docs.png";
 import pageBuilderComposer from "../assets/page-builder-composer.png";
@@ -197,6 +198,7 @@ export default class Presentation extends React.Component {
           <Heading>How can clients customize with closed DOM?</Heading>
           <Text>
             <UnorderedList>
+              <ListItem>Html blocks</ListItem>
               <ListItem>Attributes</ListItem>
               <ListItem>Slots</ListItem>
               <ListItem>Theme values</ListItem>
@@ -204,6 +206,12 @@ export default class Presentation extends React.Component {
               <ListItem>Provide their own custom components</ListItem>
             </UnorderedList>
           </Text>
+        </Slide>
+        <Slide>
+          <Heading>Html Blocks</Heading>
+          <FlexBox alignItems="center" justifyContent="center">
+            <Image src={htmlBlock} width="60%" />
+          </FlexBox>
         </Slide>
         <Slide>
           <Heading>Attributes</Heading>

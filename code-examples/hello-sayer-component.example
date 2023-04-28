@@ -6,4 +6,4 @@ class HelloWorld extends HTMLElement {
     return ['name'];
   }
 }
-customElements.define( 'hello-world', HelloWorld );
+customElements.define('hello-world', HelloWorld);
