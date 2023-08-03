@@ -1,0 +1,6 @@
+import { oneOf } from '@tybalt/validator';
+
+const validator = oneOf(['foo', 'bar']);
+
+validator.validate('foo'); // returns { passed: true }
+validator.validate('quux'); // returns { passed: false }

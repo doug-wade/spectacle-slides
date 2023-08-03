@@ -1,0 +1,22 @@
+<div class="search-container" role="search">
+  <div id="catalog-search-box" class="catalog-search-input-group">
+    <input
+      id="catalogSearchInput"
+      type="text"
+      value="{{ search_query }}"
+      class="catalog-search-input"
+      placeholder="{% trans 'storefront_search_placeholder' %}"
+      aria-label="Search"
+    />
+    <span class="catalog-search-input-button-wrapper">
+      <button 
+          class="catalog-search-input-button" 
+          type="button" 
+          title="Search" 
+          aria-labelledby="catalogSearchInput"
+      >
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </span>
+  </div>
+</div>

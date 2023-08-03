@@ -1,0 +1,9 @@
+export default function myValidatorFactory(substring) {
+    return {
+        async validate(value) {
+            return value.includes(substring);
+        },
+        logLevel: 'warning',
+        message: `must include substring ${substring}`,
+    };
+}

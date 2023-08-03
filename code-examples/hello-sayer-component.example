@@ -1,0 +1,9 @@
+class HelloWorld extends HTMLElement {
+  connectedCallback() {
+    this.textContent = `Hello ${this.getAttribute('name')}!`;
+  }
+  static get observedAttributes() {
+    return ['name'];
+  }
+}
+customElements.define('hello-world', HelloWorld);
