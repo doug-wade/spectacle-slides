@@ -1,0 +1,17 @@
+import Button, { BUTTON_VARIANTS } from '.';
+
+it('emits a click event when the button is clicked', async () => {
+    const wrapper = await mount(Button, { 
+      attributes: {
+        variant: BUTTON_VARIANTS.SECONDARY
+      },
+      slot: {
+        default: 'my custom button'
+      }
+    });
+
+    const actual = wrapper.shadowHtml().querySelector('button');
+    actual.trigger('click');
+
+    expect(wrapper.emitted('click')).toHaveLength(1);
+});

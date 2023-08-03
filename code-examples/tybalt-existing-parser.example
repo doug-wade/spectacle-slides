@@ -1,0 +1,9 @@
+import { boolean } from '@tybalt/parser';
+
+defineComponent({
+  props: {
+    option: {
+      parser: boolean
+    }
+  }
+})
