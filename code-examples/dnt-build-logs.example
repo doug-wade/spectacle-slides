@@ -1,0 +1,40 @@
+» deno task npm-build                                                                                                                  1 ↵
+Task npm-build deno run --allow-env --allow-read --allow-net --allow-write --allow-run npm-build.ts
+building version 0.0.1
+[dnt] Transforming...
+[dnt] Running npm install...
+
+added 19 packages, and audited 20 packages in 2s
+
+found 0 vulnerabilities
+[dnt] Building project...
+[dnt] Type checking ESM...
+[dnt] Emitting ESM package...
+[dnt] Emitting script package...
+[dnt] Type checking script...
+[dnt] Running post build action...
+[dnt] Running tests...
+
+> lemmyscorecard@0.0.1 test
+> node test_runner.js
+
+Running tests in ./script/main.test.js...
+
+test main ...lemmy-scorecard v0.0.4
+usage: deno run lemmy-scorecard --username <my username> --instance <my instance url>
+
+  test outputs the version ... ok
+  test outputs a help message ... ok
+  test outputs an error message when called with no args ... ok
+ok
+
+Running tests in ./esm/main.test.js...
+
+test main ...lemmy-scorecard v0.0.4
+usage: deno run lemmy-scorecard --username <my username> --instance <my instance url>
+
+  test outputs the version ... ok
+  test outputs a help message ... ok
+  test outputs an error message when called with no args ... ok
+ok
+[dnt] Complete!

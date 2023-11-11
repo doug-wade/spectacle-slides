@@ -1,0 +1,66 @@
+» deno task npm-build
+Task npm-build deno run --allow-env --allow-read --allow-net --allow-write --allow-run npm-build.ts
+A new release of Deno is available: 1.37.2 → 1.38.0 Run `deno upgrade` to install it.
+building version 0.0.1
+[dnt] Transforming...
+[dnt] Running npm install...
+
+added 19 packages, and audited 20 packages in 2s
+
+found 0 vulnerabilities
+[dnt] Building project...
+[dnt] Type checking ESM...
+[dnt] Emitting ESM package...
+[dnt] Emitting script package...
+[dnt] Type checking script...
+[dnt] Running post build action...
+[dnt] Running tests...
+
+> lemmyscorecard@0.0.1 test
+> node test_runner.js
+
+Running tests in ./script/main.test.js...
+
+test main ...lemmy-scorecard v0.0.4
+usage: deno run lemmy-scorecard --username <my username> --instance <my instance url>
+
+  test outputs the version ...
+    AssertionError: spy not called with expected args:
+
+
+        [Diff] Actual / Expected
+
+
+        [
+    -     'lemmy-scorecard v0.0.4'
+    +     'lemmy-scorecard v0.0.5'
+        ]
+
+        at assertSpyCall (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/mock.js:582:23)
+        at Object.<anonymous> (/Users/doug/code/lemmy-scorecard/npm/script/main.test.js:20:37)
+        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+        at async TestSuiteInternal.runTest (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/_test_suite.js:307:13)
+        at async TestSuiteInternal.runTest (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/_test_suite.js:292:17)
+        at async Object.fn (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/_test_suite.js:265:25)
+        at async Object.step (/Users/doug/code/lemmy-scorecard/npm/test_runner.js:136:21)
+        at async TestSuiteInternal.run (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/_test_suite.js:273:13)
+        at async Object.fn (/Users/doug/code/lemmy-scorecard/npm/script/deps/deno.land/std@0.205.0/testing/_test_suite.js:130:29)
+        at async runTestDefinitions (/Users/doug/code/lemmy-scorecard/npm/test_runner.js:54:13)
+  fail
+  test outputs a help message ... ok
+  test outputs an error message when called with no args ... ok
+fail
+
+FAILURES
+
+main
+  Error: Had failing test step.
+      at runTestDefinitions (/Users/doug/code/lemmy-scorecard/npm/test_runner.js:58:26)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async main (/Users/doug/code/lemmy-scorecard/npm/test_runner.js:31:9)error: Uncaught (in promise) Error: npm run test failed with exit code 1
+      throw new Error(
+            ^
+    at runCommand (https://deno.land/x/dnt@0.38.1/lib/utils.ts:56:13)
+    at eventLoopTick (ext:core/01_core.js:183:11)
+    at async build (https://deno.land/x/dnt@0.38.1/mod.ts:407:5)
+    at async file:///Users/doug/code/lemmy-scorecard/npm-build.ts:11:1
