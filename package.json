@@ -11,7 +11,6 @@
     "clean": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
     "lint": "eslint --ext .js,.jsx .",
-    "deploy": "npm run clean & npm run build && surge -p .",
     "start": "cross-env NODE_ENV=development node server.js"
   },
   "author": "",
@@ -50,7 +49,6 @@
     "rimraf": "^3.0.2",
     "spectacle-mdx-loader": "^0.1.1",
     "style-loader": "^3.3.1",
-    "surge": "latest",
     "url-loader": "^4.1.1",
     "webpack": "5.76.0",
     "webpack-dev-middleware": "^5.3.1",
