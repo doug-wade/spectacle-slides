@@ -1,0 +1,13 @@
+---
+pagination:
+  data: presentations
+  size: 1
+  alias: presentation
+layout: base.html
+permalink: "{{ presentation.url }}"
+eleventyComputed:
+  title: "{{ presentation.title }}"
+---
+
+<div id="root"></div>
+<script src="{{ presentation.jsPath }}" type="module"></script>
