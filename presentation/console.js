@@ -4,17 +4,11 @@ import {
   Box,
   CodePane,
   Deck,
-  FlexBox,
-  FullScreen,
   Heading,
   Image,
-  ListItem,
   Notes,
-  Progress,
-  Quote,
   Slide,
   Text,
-  UnorderedList,
 } from "spectacle";
 
 const images = {
@@ -33,8 +27,8 @@ const images = {
 const Presentation = () => (
   <Deck>
     <Slide>
-        <Heading>Using Chrome's console</Heading>
-        <Heading fontSize="h3">It's not just console.log anymore</Heading>
+        <Heading>Using Chrome&apos;s console</Heading>
+        <Heading fontSize="h3">It&apos;s not just console.log anymore</Heading>
         <Text>
             Created by <a href="http://github.com/doug-wade">Doug Wade</a> / <a href="https://mastodon.xyz/@dougwade">@dougwade</a>
         </Text>
@@ -170,7 +164,7 @@ console.dir(characters[3]);
 console.table(characters);`}
         </CodePane>
         <Notes>
-            Here's code with dates to show dates
+            Here&apos;s code with dates to show dates
             <CodePane language="javascript">{`
 console.dir({ name: 'Archer', age: 37, aliases: ['Duchess', 'Randy'], created: new Date() });
             `}</CodePane>

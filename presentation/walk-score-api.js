@@ -4,14 +4,10 @@ import {
   Box,
   CodePane,
   Deck,
-  FlexBox,
-  FullScreen,
   Heading,
   Image,
   ListItem,
   OrderedList,
-  Progress,
-  Quote,
   Slide,
   Text,
   UnorderedList,
@@ -274,7 +270,7 @@ router.get('/api/stop/:id', function *() {
     "distance": 0.0437115618187228
   , "name": "1ST AVE & LENORA ST"
   , "summary_text": "1ST AVE & LENORA ST (0.0 mi)\t99, 121"
-  , "summary_html": "<span class=\"walkscore\"><span class=\"stop\">1ST AVE &amp; LENORA ST</span> <span class=\"distance\">(0.0 mi)</span> <span class=\"Bus\">99, 121</span></span>"
+  , "summary_html": "<span class="walkscore"><span class="stop">1ST AVE &amp; LENORA ST</span> <span class="distance">(0.0 mi)</span> <span class="Bus">99, 121</span></span>"
   , "route_summary": [
       {
         "category": "Bus"
@@ -372,8 +368,8 @@ function getRoute() {
             <CodePane language="javascript">{`
 function linestringToCoordinates(linestring) {
   return linestring
-    .replace(/LINESTRING\(/i, '')
-    .replace(/\)/i, '')
+    .replace(/LINESTRING(/i, '')
+    .replace(/)/i, '')
     .split(',')
     .map(function(coord) {
       var parts = coord.split(' ');
