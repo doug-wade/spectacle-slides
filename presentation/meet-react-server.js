@@ -4,14 +4,11 @@ import {
   Box,
   CodePane,
   Deck,
-  FlexBox,
-  FullScreen,
   Heading,
   Image,
   ListItem,
   UnorderedList,
   Notes,
-  Progress,
   Slide,
   Text
 } from "spectacle";
@@ -40,27 +37,27 @@ const Presentation = () => (
                 <UnorderedList>
                     <ListItem>Thank Max Stoiber for the intro to css</ListItem>
                     <ListItem>Express excitement to be in Amsterdam</ListItem>
-                    <ListItem>Going to talk about my favorite FOSS project, though we'll see after James Kyle's talk ;)</ListItem>
+                    <ListItem>Going to talk about my favorite FOSS project, though we&apos;ll see after James Kyle&apos;s talk ;)</ListItem>
                 </UnorderedList>
             </Notes>
         </Slide>
 
         <Slide>
-            <Heading>What's wrong?</Heading>
+            <Heading>What&apos;s wrong?</Heading>
             <Heading fontSize="h3">Javascript Fatigue</Heading>
             <Image width="65%" src={images.jsFatigue} />
 
             <Notes>
                 <UnorderedList>
                 <ListItem>There are too many tools, and they change too often.</ListItem>
-                <ListItem>The tooling is complicated to set up, and inaccessible for "joe and jane developer".</ListItem>
+                <ListItem>The tooling is complicated to set up, and inaccessible for &quot;joe and jane developer&quot;.</ListItem>
                 <ListItem>it took us many months/tries/mistakes to get a universal react app working well.</ListItem>
                 </UnorderedList>
             </Notes>
         </Slide>
 
         <Slide>
-            <Heading>What's wrong?</Heading>
+            <Heading>What&apos;s wrong?</Heading>
             <Heading fontSize="h3">Slow Internet</Heading>
             <Image width="65%" src={images.mobileVsFixed} />
             <Text>Credit/Source: <a href="http://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx">ITU ICT Facts and Figures 2016</a></Text>
@@ -70,14 +67,14 @@ const Presentation = () => (
                     <ListItem>From the The International Telecommunication Union, a branch of the UN</ListItem>
                     <ListItem>Most internet users are on mobile.</ListItem>
                     <ListItem>Most internet users are not in the first world.</ListItem>
-                    <ListItem>Most internet users don't have the patience to wait while your 4 MB bundle downloads</ListItem>
+                    <ListItem>Most internet users don&apos;t have the patience to wait while your 4 MB bundle downloads</ListItem>
                     <ListItem>(47% of consumers expect a web page to load in 2 seconds or less).</ListItem>
                 </UnorderedList>
             </Notes>
         </Slide>
 
         <Slide>
-            <Heading>What's wrong?</Heading>
+            <Heading>What&apos;s wrong?</Heading>
             <Heading fontSize="h3">No Javascript</Heading>
             <Image src={images.noJs} />
 
@@ -85,7 +82,7 @@ const Presentation = () => (
                 <UnorderedList>
                     <ListItem>Primarily an SEO problem.</ListItem>
                     <ListItem>Some users blocking because of ads or security.</ListItem>
-                    <ListItem>Has the added benefit of maintaining the "document" nature of the web</ListItem>
+                    <ListItem>Has the added benefit of maintaining the &quot;document&quot; nature of the web</ListItem>
                 </UnorderedList>
             </Notes>
         </Slide>
@@ -101,7 +98,7 @@ const Presentation = () => (
             <Notes>
                 <UnorderedList>
                     <ListItem>
-                    They're p similar: they all come with a babel preset,
+                    They&apos;re p similar: they all come with a babel preset,
                     webpack configuration
                     </ListItem>
 
@@ -193,8 +190,8 @@ const Presentation = () => (
             <Notes>
                 <UnorderedList>
                     <ListItem>Address impatient users by getting chunks on the page as soon as possible</ListItem>
-                    <ListItem>Prevent users from clicking on the wrong element when the page "jumps" (Dark Pattern)</ListItem>
-                    <ListItem>Treat the page like a document that "snaps in" as soon as it is ready</ListItem>
+                    <ListItem>Prevent users from clicking on the wrong element when the page &quot;jumps&quot; (Dark Pattern)</ListItem>
+                    <ListItem>Treat the page like a document that &quot;snaps in&quot; as soon as it is ready</ListItem>
                     <ListItem>The page becomes interactive as soon as above-the-fold content is loaded but no sooner</ListItem>
                 </UnorderedList>
             </Notes>
@@ -208,7 +205,7 @@ const Presentation = () => (
             <Notes>
                 <UnorderedList>
                     <ListItem>Send a bundle of data + code that was used for server rendering so the DOM render the same.</ListItem>
-                    <ListItem>client-side rendering "prequests" that the server ready a data bundle and hold it until the request</ListItem>
+                    <ListItem>client-side rendering &quot;prequests&quot; that the server ready a data bundle and hold it until the request</ListItem>
                 </UnorderedList>
             </Notes>
         </Slide>
@@ -280,7 +277,7 @@ export default class ExamplePage {
             <Notes>
                 <UnorderedList>
                     <ListItem>Lifecycle methods are specially named methods that React Server calls as part of the page lifecycle</ListItem>
-                    <ListItem>React Server provides "best-guess" defaults for all lifecycle methods</ListItem>
+                    <ListItem>React Server provides &quot;best-guess&quot; defaults for all lifecycle methods</ListItem>
                     <ListItem>This example adds meta tags and a title to the page head</ListItem>
                 </UnorderedList>
             </Notes>
@@ -340,7 +337,7 @@ export default class ExamplePage {
             <Notes>
                 <UnorderedList>
                     <ListItem>External synchronous js file can significantly impact perf by blocking</ListItem>
-                    <ListItem>devs define css + js in a structured way so they can't tank perf</ListItem>
+                    <ListItem>devs define css + js in a structured way so they can&apos;t tank perf</ListItem>
                     <ListItem>prepares us for http2 by creating a manifest of js + css to push</ListItem>
                     <ListItem>body classes allow you to add classes to the generated body tag</ListItem>
                 </UnorderedList>
@@ -482,7 +479,7 @@ navigator.on("loadComplete", onLoadComplete);`}
         </Slide>
 
         <Slide>
-            <Heading>What's next?</Heading>
+            <Heading>What&apos;s next?</Heading>
             <UnorderedList>
                 <ListItem>Webpack (and hmr!) on the server</ListItem>
                 <ListItem>Clustering</ListItem>

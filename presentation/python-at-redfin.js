@@ -48,8 +48,8 @@ const Presentation = () => (
             <Text>Platforms team</Text>
 
             <Notes>
-                I'm mostly a javascriptista, but Python was the first language I liked
-                I've been at Redfin almost a year
+                I&apos;m mostly a javascriptista, but Python was the first language I liked
+                I&apos;ve been at Redfin almost a year
                 I work mostly on front end build, especially performance
             </Notes>
         </Slide>
@@ -71,7 +71,7 @@ const Presentation = () => (
                 <ListItem>walk score deployments</ListItem>
             </UnorderedList>
             <Notes>
-                These are smaller uses; just emphasizing Python's ubiquity
+                These are smaller uses; just emphasizing Python&apos;s ubiquity
                 Our nagios alerts are a subset used to monitor Jenkins
                 Our test team uses python to run performance tests against the site
                 The data team uses python for listings imports, photos
@@ -89,7 +89,7 @@ const Presentation = () => (
             </OrderedList>
 
             <Notes>
-                We're currently working on creating a continuous deployment pipeline
+                We&apos;re currently working on creating a continuous deployment pipeline
                 Many parts of the are written in Python
                 Our Python is rapidly growing
             </Notes>
@@ -112,7 +112,7 @@ const Presentation = () => (
             <Notes>
                 Written at Google, uses hermeticism to guarantee reproducability, and a distributed artifact cache for performance
                 This is a big part of our move to continuous deployment, to get builds under 6 minutes
-                We've struggled with our module builds because of npm violations of bazel assumptions
+                We&apos;ve struggled with our module builds because of npm violations of bazel assumptions
             </Notes>
         </Slide>
 
@@ -155,7 +155,7 @@ external_npm_module = rule(
             <Notes>
                 Used almost exclusively for deployments
                 Is managed by a Google doc that is translated to xml and then updates the google doc with timing data
-                Manage everything except a small subset of ops boxes that aren't deployed to
+                Manage everything except a small subset of ops boxes that aren&apos;t deployed to
             </Notes>
         </Slide>
 
@@ -297,7 +297,7 @@ $ pip install https://github.com/redfin/dirpy/zipball/master`}
         </Slide>
 
         <Slide>
-            <Heading>We're Hiring!</Heading>
+            <Heading>We&apos;re Hiring!</Heading>
             <Heading fontSize="h3"><a href="http://www.redfin.com/about/jobs/hq">Jobs site</a></Heading>
             <Text>Contact us: <a href="mailto:techrecruiting@redfin.com">techrecruiting@redfin.com</a></Text>
         </Slide>
@@ -305,11 +305,11 @@ $ pip install https://github.com/redfin/dirpy/zipball/master`}
         <Slide>
             <Heading>Questions?</Heading>
             <Quote>
-                This couldn't possibly work, could it?  It can't be that easy, can it?  But it works! - Dan Fabulich
+                This couldn&apos;t possibly work, could it?  It can&apos;t be that easy, can it?  But it works! - Dan Fabulich
             </Quote>
             <Notes>
-                Mostly, our experience in Python has been: it shouldn't be this easy, but it is
-                Dan / jlo's story about starting a thread / process pool
+                Mostly, our experience in Python has been: it shouldn&apos;t be this easy, but it is
+                Dan / jlo&apos;s story about starting a thread / process pool
             </Notes>
         </Slide>
     </Deck>
