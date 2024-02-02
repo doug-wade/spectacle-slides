@@ -1,25 +1,11 @@
 # Doug Wade's Slides
 
-## Reference
+These are the slides from tech talks I've given over the years. They're currently hosted [here](https://unrivaled-gumdrop-fab577.netlify.app/).
 
-The Spectacle core API is available at [https://github.com/FormidableLabs/spectacle/blob/master/README.markdown](https://github.com/FormidableLabs/spectacle/blob/master/README.markdown).
+## Running locally
 
-## Development
+After downloading the repo, your first order of business is to open terminal and run `yarn`.
 
-After downloading the repo, your first order of business is to open terminal and run `npm install` (or `yarn` if you're about that life)
+Then, build and start the local server, run `yarn build && yarn start`,
 
-Next, to display the presentation you're interested in, update index.js to import the presentation from `/presentation` you're interested in.  For example, to view `modern-client-side-stack`, change the current import to
-
-```js
-import Presentation from "./presentation/modern-client-side-stack";
-```
-
-Then, to start up the local server, run `npm start`
-
-Open a browser and hit [http://localhost:3000](http://localhost:3000), and we are ready to roll
-
-## Build & Deployment
-
-Building the dist version of the project is as easy as running `npm run build`
-
-If you want to deploy the slideshow to surge, run `npm run deploy`
+Open a browser and hit [http://localhost:8080](http://localhost:8080), and you should see the index page listing all of the available slide decks.
