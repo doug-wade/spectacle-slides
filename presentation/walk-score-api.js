@@ -17,7 +17,10 @@ import {
   UnorderedList,
 } from "spectacle";
 
+import "normalize.css";
+
 const images = {
+    moreLess: require("../assets/more-less.gif"),
 };
 
 const Presentation = () => (
