@@ -13,6 +13,8 @@ import {
 
 import "normalize.css";
 
+import theme from "../themes/default";
+
 import breakpoint from "../assets/breakpoint.png";
 import breakpointRebinds from "../assets/const-rebinds-in-console.png";
 import debuggerSidebar from "../assets/debugger-sidebar.png";
@@ -20,13 +22,6 @@ import openOverridesTab from "../assets/open-overrides-tab.png";
 import overridesTab from "../assets/overrides-tab.png";
 import saveForOverrides from "../assets/save-for-overrides.png";
 import selectFolderForOverrides from "../assets/select-folder-for-overrides.png";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
 
 const Presentation = () => (
   <Deck theme={theme}>

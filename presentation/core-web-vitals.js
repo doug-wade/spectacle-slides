@@ -17,12 +17,7 @@ import {
   UnorderedList,
 } from "spectacle";
 
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif'
-  }
-};
+import theme from "../themes/default";
 
 import cypressWebVitalsTest from "../code-examples/cypress-web-vitals-test.example";
 

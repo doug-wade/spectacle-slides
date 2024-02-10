@@ -13,12 +13,7 @@ import {
 
 import "normalize.css";
 
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from "../themes/default";
 
 import customContext from "../code-examples/tybalt-create-context.example";
 import defineButton from "../code-examples/tybalt-button.example";
@@ -27,6 +22,7 @@ import customValidator from "../code-examples/tybalt-custom-validator.example";
 import existingValidator from "../code-examples/tybalt-existing-validator.example";
 import customParser from "../code-examples/tybalt-custom-parser.example";
 import existingParser from "../code-examples/tybalt-existing-parser.example";
+import theme from "../themes/night-owl";
 
 const Presentation = () => (
   <Deck theme={theme}>

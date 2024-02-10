@@ -16,12 +16,7 @@ import {
 
 import "normalize.css";
 
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from "../themes/default";
 
 import cssModularModel from "../assets/css-modular-model.png";
 import newCssFeatures from "../assets/new-css-features.png";

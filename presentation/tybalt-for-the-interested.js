@@ -15,12 +15,7 @@ import {
 
 import "normalize.css";
 
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from "../themes/default";
 
 import butWhy from "../assets/but-why.gif";
 

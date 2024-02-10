@@ -12,6 +12,8 @@ import {
 
 import "normalize.css";
 
+import theme from "../themes/default";
+
 import csvDownloadButton from "../code-examples/csv-download-button.example";
 import customCellComponent from "../code-examples/custom-cell-component.example";
 import customCellUsage from "../code-examples/custom-cell-usage.example";
@@ -21,13 +23,6 @@ import selectedRows from "../code-examples/selected-rows.example";
 import sharingStateWithCharts from "../code-examples/sharing-state-with-charts.example";
 import useDataTableApiMethod from "../code-examples/use-data-table-api-method.example";
 import useDataTablePaginator from "../code-examples/use-data-table-paginator.example";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
 
 const Presentation = () =>(
   <Deck theme={theme}>

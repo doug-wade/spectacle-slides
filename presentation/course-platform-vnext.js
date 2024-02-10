@@ -13,28 +13,10 @@ import {
   UnorderedList,
 } from "spectacle";
 
-import nightOwl from "react-syntax-highlighter/dist/esm/styles/prism/night-owl.js";
-
 import "normalize.css";
 
-const theme = {
-  colors: {
-    primary: "#4D94DB",
-    secondary: "#CCE0F5",
-    orange: "#FB7544",
-    purple: "#6150AC",
-    white: "#ffffff",
-    yellow: "#F4C050",
-    green: "#63CE9A",
-    turquoise: "#47C1BF",
-    red: "#FB4451",
-    tertiary: "#001429",
-  },
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from "../themes/skilljar";
+import tinyCodeTheme from "../themes/tiny-code";
 
 import butWhy from "../assets/but-why.gif";
 import cssBoxModel from "../assets/css-box-model.png";
@@ -56,18 +38,6 @@ import helloSayerComponent from "../code-examples/hello-sayer-component.example"
 import legacyAnnouncementBanner from "../code-examples/legacy-announcement-banner.example";
 import searchBoxHtml from "../code-examples/search-box-html.example";
 import styledButtonComponent from "../code-examples/styled-button-component.example";
-
-const tinyCodeTheme = {
-  ...nightOwl,
-  'code[class*="language-"]': {
-    ...nightOwl['code[class*="language-"]'],
-    fontSize: ".5em",
-  },
-  'pre[class*="language-"]': {
-    ...nightOwl['pre[class*="language-"]'],
-    lineHeight: ".5",
-  },
-};
 
 const Presentation = () => (
   <Deck theme={theme}>
