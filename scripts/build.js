@@ -11,7 +11,7 @@ const entryPoints = files.map((file) => {
 await esbuild.build({
   entryPoints,
   bundle: true,
-//   minify: true,
+  minify: true,
   sourcemap: true,
   target: ['es2020'],
   plugins: [inlineImage()],

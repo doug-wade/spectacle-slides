@@ -1,0 +1,25 @@
+<template>
+  <div>
+    <DataChart :data="data" :error="error" :loading-state="loadingState" />
+    <DataTable :data="data" :error="error" :loading-state="loadingState">
+      <template #paginator>
+        <Paginator v-model="paginator" />
+      </template>
+      <template #csv>
+        <CSVDownloadButton @click="downloadCSV" />
+      </template>
+    </DataTable>
+  </div>
+</template>
+
+<script setup>
+import { useDataTablePaginator, useDataTableApiMethod } from '@/composables/DataTable';
+
+const { paginator } = useDataTablePagination({
+  perPageOptions: [10, 25, 50, 75, 100]
+});
+
+const { data, error, loadingState, downloadCSV } = useDataTableMethod({ 
+  method: ApiService.Example.dataTable
+});
+</script>

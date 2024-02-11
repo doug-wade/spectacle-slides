@@ -105,7 +105,7 @@ const Presentation = () => (
       </UnorderedList>
     </Slide>
     <Slide>
-      <Heading>Discovering Unocumented Vue Components</Heading>
+      <Heading>Discovering Undocumented Vue Components</Heading>
       <UnorderedList>
         <ListItem>Finding current uses</ListItem>
         <ListItem>Looking at the props</ListItem>
