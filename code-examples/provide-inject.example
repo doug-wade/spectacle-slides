@@ -1,0 +1,19 @@
+<script setup>
+import { provide, reactive } from 'vue';
+
+const pageNumber = reactive(1);
+
+provide('updatePageNumber', (newPage) => {
+    pageNumber = newPage;
+    const data = await = fetch(`/api/data?page=${pageNumber}`);
+});
+provide('pageNumber', pageNumber);
+</script>
+
+<script setup>
+import { inject } from 'vue'
+
+const pageNumber = inject('pageNumber');
+const updatePageNumber = inject('updatePageNumber');
+const handleClick = updatePageNumber(pageNumber + 1);
+</script>
