@@ -274,7 +274,7 @@ const Presentation = () => (
       <Heading>Redesign</Heading>
       <CodePane 
         language="javascript" 
-        highlightRanges={[[1, 11], [13, 15], [2, 2], [3, 5], [6, 6],[7, 9]]}>
+        highlightRanges={[[1, 13], [15, 25], [2, 2], [3, 5], [6, 6],[7, 9]]}>
           {redesignDataTableExample}
       </CodePane>
     </Slide>
