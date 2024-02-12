@@ -12,7 +12,7 @@ import {
   UnorderedList,
 } from "spectacle";
 
-import theme from "react-syntax-highlighter/dist/esm/styles/prism/night-owl.js";
+import theme from "../themes/night-owl";
 
 import "normalize.css";
 

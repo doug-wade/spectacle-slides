@@ -12,13 +12,7 @@ import {
 } from "spectacle";
 
 import "normalize.css";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from '../themes/default';
 
 import biologicalClassification from "../assets/Biological_classification.png";
 import carlVonLinne from "../assets/Carl_von_Linné.jpg";

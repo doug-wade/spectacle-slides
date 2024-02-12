@@ -12,20 +12,7 @@ import {
   Text
 } from "spectacle";
 
-const theme = {
-  fonts: {
-    primary: "Menlo"
-  },
-  colors: {
-    primary: "#042B35",
-    secondary: "#D2A03E",
-    tertiary: "#FD853D",
-    quartenary: "#A7A7A7",
-    code: "#A7A7A7",
-    text: "#A7A7A7",
-    link: "#D2A03E"
-  }
-};
+import theme from '../themes/orangesicle';
 
 import "normalize.css";
 
@@ -99,9 +86,9 @@ const Presentation = () => (
         all mentioned proposals match all criteria; I&apos;ll call them out as we go along.  We&apos;ll go stage by stage.
       </Notes>
     </Slide>
-<Slide bgColor="tertiary" textColor="primary">
-<Heading size={6}>Field Declarations</Heading>
-<CodePane lang="javascript" source={`
+    <Slide bgColor="tertiary" textColor="primary">
+      <Heading size={6}>Field Declarations</Heading>
+      <CodePane language="javascript">{`
 class Counter {
 x = 0
 increment { this.x += 1 }
@@ -109,15 +96,15 @@ increment { this.x += 1 }
 const c = new Counter()
 c.intcrement()
 console.assert(c.x === 1) // Pass
-`} />
-<Notes>
-  First up is field declarations. Previously you had to set values in a constructor. Now, you can declare class fields
-  anywhere in the class definitions. Neat!
-</Notes>
-</Slide>
+`}</CodePane>
+      <Notes>
+        First up is field declarations. Previously you had to set values in a constructor. Now, you can declare class fields
+        anywhere in the class definitions. Neat!
+      </Notes>
+    </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={6}>Private Fields</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 class Counter {
 #xValue = 0
 get x() { return #xValue }
@@ -129,7 +116,7 @@ const c = new Counter()
 c.increment()
 console.assert(c.x === 1)
 x.#xValue = 3 // syntax error
-`}>
+`}
       </CodePane>
       <Notes>
   Next up is private fields. Unlike Python where all fields are public and private fields are by convention
@@ -140,7 +127,7 @@ x.#xValue = 3 // syntax error
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={6}>Class Static Methods</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 class ColorFinder {
 static #green = "#00ff00";
 static #blue = "#0000ff";
@@ -154,7 +141,7 @@ switch (name) {
 }
 }
 console.assert(ColorFinder.colorName("blue"), "#0000ff") // Pass
-`}>
+`}
       </CodePane>
       <Notes>
   This pattern is not strictly required in a functional language like JavaScript, where functions are first-class
@@ -164,10 +151,10 @@ console.assert(ColorFinder.colorName("blue"), "#0000ff") // Pass
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={6}>at()</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const l = [1, 2, 3, 4]
 console.assert(l[-2] === 3)
-`}>
+`}
       </CodePane>
       <Notes>
   This is a method that will be familiar to Python developers. Note that you still can&apos;t index directly into the 
@@ -180,14 +167,14 @@ console.assert(l[-2] === 3)
       <Notes>
         The next set of proposals are stage 2. These are more speculative, but still stable enough that you should
   feel comfortable using them in production code.
-</Notes>
+      </Notes>
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={6}>throw expressions</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const encoder = encoding === 'utf8' ? new UTF8Encoder : throw new Error()
 function save(filename = throw new TypeError('filename required')
-      `}>
+      `}
       </CodePane>
       <Notes>
   Next are throw expressions. JavaScript has had the throw statement since the beginning, but statements can
@@ -199,7 +186,7 @@ function save(filename = throw new TypeError('filename required')
     </Slide>        
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>New Set methods</Heading>
-      <CodePane lang="javascript" source ={`
+      <CodePane language="javascript" source ={`
 Set.prototype.intersection(iterable)
 Set.prototype.union(iterable)
 Set.prototype.difference(iterable)
@@ -216,13 +203,13 @@ Set.prototype.isSupersetOf(iterable)
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>Temporal</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const now = Temporal.now.instant()
 const beginningOfTime = Temporal.Instant(0n)
 const myBirthday = Temporal.Instant.from('2021-08-24T00:00Z')
 const lAEpoch = new Temporal.ZonedDateTime(0n, 'America/Los_Angeles');
 const duration = new Temporal.Duration({ months: 1, days: 15 })
-`}>
+`}
       <Notes>
   Temporal is a really big proposal, and probably the one I&apos;m most excited about. For years, we&apos;ve known that
   dates are broken in JavaScript, and for a long time the solution was to use moment.js. But moment is pretty
@@ -235,7 +222,7 @@ const duration = new Temporal.Duration({ months: 1, days: 15 })
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>Map.prototype.emplace</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 // Instead of
 if (!map.hasKey(key)) { 
 map.set(key, value); 
@@ -244,7 +231,7 @@ map.get(key).doThing();
 
 // Now we can
 map.emplace(key, { insert: () => value }).doThing()
-      `}>
+      `}
       </CodePane>
       <Notes>
         If you&apos;ve been writing object-oriented JavaScript (and most code at Indeed seems to be object-oriented), 
@@ -255,7 +242,7 @@ map.emplace(key, { insert: () => value }).doThing()
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>Tuple and Record</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const proposal = #{
 id: 1234,
 title: "Records and Tuples!"
@@ -264,7 +251,7 @@ keywords: #["ecma", "tc39", "proposal", "record", "tuple"]
 console.log(proposal.id) // 1234
 const proposal2 = #{ ...proposal, "plus": "Doug" }
 Object.keys(proposal) // ["id", "title", "keywords"]
-      `}>
+      `}
       </CodePane>
       <Notes>
   Records and tuples follow a general JavaScript trend towards the safety of immutability. Tuples should be
@@ -274,7 +261,7 @@ Object.keys(proposal) // ["id", "title", "keywords"]
     </Slide>
     <Slide bgColor="tertiary" textColor="primary" >
       <Heading size={4}>Error Causes</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 async function doTheNeedful() {
 return await fetch('www.skilljar.com').catch(e => throw new Error('Upload failed', e)
 }
@@ -284,7 +271,7 @@ await doTheNeedful()
 console.log(e) // Error: Upload failed
 console.log(e.cause) // TypeError: Failed to fetch
 }
-`}>
+`}
       </CodePane>
       <Notes>
   Error caused by is as much a proposal about a convention as it is about changing the JavaScript engine.
@@ -294,7 +281,7 @@ console.log(e.cause) // TypeError: Failed to fetch
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>Decorators</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 class MyComponent {
 @autobind
 #clickHandler() {
@@ -306,22 +293,24 @@ render() {
 return h('button', { onclick: { this.#clickHandler } })
 }
 }
-      `}>
+      `}
       </CodePane>
-<Slide bgColor="tertiary" textColor="primary">
-  <Heading size={4}>Iterator Helpers and .range</Heading>
-  <CodePane language="javascript" source={`
+    </Slide>
+    <Slide bgColor="tertiary" textColor="primary">
+      <Heading size={4}>Iterator Helpers and .range</Heading>
+      <CodePane language="javascript">{`
 const odds = Number.range(0, Infinity)
 .take(1000)
 .filter((x) => (x % 2))
 .toArray()
-`}/>
-<Notes>
-  I&apos;ve combined two proposals here -- the iterator helpers, which adds a lot of fluent methods to iterators like take --
-  and the Number.range and BigInt.range methods to show that you can lazily evaluate iterables to create pipelines that
-  work well with async functions and generators.
-</Notes>
-</Slide>
+`}</CodePane>
+      <Notes>
+        I&apos;ve combined two proposals here -- the iterator helpers, which adds a lot of fluent methods to iterators like take --
+        and the Number.range and BigInt.range methods to show that you can lazily evaluate iterables to create pipelines that
+        work well with async functions and generators.
+      </Notes>
+    </Slide>
+    <Slide bgColor="tertiary" textColor="primary">
       <Notes>
         Caveat Emptor: those of us who have been following the standards process for a while might cringe a bit by the inclusion
   of decorators here. Decorators are a proposal that has been in progress for some time, and has gone through some changes, 
@@ -331,7 +320,7 @@ const odds = Number.range(0, Infinity)
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>Decorators</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const time = (wrapped) => {
 return () => {
 console.time('timing wrapped');
@@ -341,7 +330,7 @@ return result;
 }
 }
 
-      `}>
+      `}
       </CodePane>
       <Notes>
         Decorators are fundamentally syntactic sugar for functions.  Here, we define a simple implementation of the time decorator
@@ -353,12 +342,12 @@ return result;
       <Heading size={1}>Stage 1</Heading>
       <Notes>
         The next set of proposals are stage 1. These are very speculative, and you should not feel comfortable
-  using them in production code.
-</Notes>
+      using them in production code.
+    </Notes>
     </Slide>
     <Slide bgColor="tertiary" textColor="primary">
       <Heading size={4}>do expressions</Heading>
-      <CodePane lang="javascript" source={`
+      <CodePane language="javascript">{`
 const myResult = do {
 switch (myValue) {
 case 1:
@@ -371,82 +360,82 @@ default:
   'x'
 }
 }
-      `}>
+      `}
       </CodePane>
       <Notes>
         do expressions are awesome.  Do expressions turn statements into expressions, and return the result of what would be a statement.
         This allows you to return the result of a switch or if statement and assign it to a variable, or return it for a function.
       </Notes>
     </Slide>
-<Slide bgColor="tertiary" textColor="primary">
-<Heading size={4}>Slice Notation</Heading>
-<CodePane lang="javascript" source={`
+    <Slide bgColor="tertiary" textColor="primary">
+      <Heading size={4}>Slice Notation</Heading>
+      <CodePane language="javascript">{`
 const arr = ['a', 'b', 'c', 'd']
 arr[1:2] // ['b', 'c']
 arr[1:] // ['b', 'c', 'd']
 arr[-2:] // ['c', 'd']
-`}>
-</CodePane>
-<Notes>
-  This should look pretty familiar. It has the same semantics as the Python equivalent, and as Array.slice.
-</Notes>
-</Slide>
-<Slide bgColor="tertiary" textColor="primary">
-<Heading size={4}>Pattern Matching</Heading>
-<CodePane lang="javascript" source={`
+`}
+      </CodePane>
+      <Notes>
+        This should look pretty familiar. It has the same semantics as the Python equivalent, and as Array.slice.
+      </Notes>
+    </Slide>
+    <Slide bgColor="tertiary" textColor="primary">
+      <Heading size={4}>Pattern Matching</Heading>
+      <CodePane language="javascript">{`
 const getLength = vector => case (vector) {
 when { x, y, z } -> Math.hypot(x, y, z)
 when { x, y } -> Math.hypot(x, y)
 when [...etc] -> vector.length
 }
 getLength({ x: 1, y: 2, z: 3 }) // 3.74165
-`}/>
-<Notes>
-  When I was studying Scala and Standard ML of New Jersey, one of my favorite features was pattern matching. It seemed (and seems) to
-  me as a more elegant solution to a switch statement, or nested ifs. Note that it uses the same semantics as the existing destructuring
-  syntax, making it more relatable and easier to use.
-</Notes>
+`}</CodePane>
+      <Notes>
+        When I was studying Scala and Standard ML of New Jersey, one of my favorite features was pattern matching. It seemed (and seems) to
+        me as a more elegant solution to a switch statement, or nested ifs. Note that it uses the same semantics as the existing destructuring
+        syntax, making it more relatable and easier to use.
+      </Notes>
     </Slide>
-<Slide bgColor="tertiary" textColor="primary">
-<Heading size={4}>Decimal</Heading>
-<CodePane lang="javascript" source={`
+    <Slide bgColor="tertiary" textColor="primary">
+      <Heading size={4}>Decimal</Heading>
+      <CodePane language="javascript">{`
 function calculateBill(items, tax) {
 let total = 0m
 for (let { price, count } of items) {
 total += price * BigDecimal(count)
 }
 return BigDecimal.round(total * (1m + tax), { maximumFractionDigits: 2, round: "up"});
-`}/>
-<Notes>
-  One of the most common errors, and especially when handling money, is the problem of IEEE 754 floating point numbers. The inability of
-  floating point numbers to represent even whole numbers can lead to costly errors. To resolve this, there is a proposal to add a BigDecimal
-  built-in that, like BigInt, represents larger numbers precisely.
-</Notes>
-</Slide>
-<Slide>
-<Heading bgColor="tertiary" textColor="primary">Standard Library</Heading>
-<CodePane lang="javascript" source={`
+`}</CodePane>
+      <Notes>
+        One of the most common errors, and especially when handling money, is the problem of IEEE 754 floating point numbers. The inability of
+        floating point numbers to represent even whole numbers can lead to costly errors. To resolve this, there is a proposal to add a BigDecimal
+        built-in that, like BigInt, represents larger numbers precisely.
+      </Notes>
+    </Slide>
+    <Slide>
+      <Heading bgColor="tertiary" textColor="primary">Standard Library</Heading>
+      <CodePane language="javascript">{`
 import { dedent } from '@std/strings'
-`}/>
-<Notes>
-  One of the biggest complaints about JavaScript is its lack of a standard library. Luckily there is a proposal to add a mechansism for
-  adding new libraries and methods to the JavaScript standard library without colliding with existing methods and objects. I personally
-  don&apos;t have a lot of hope for this one getting through, since the standards committee has been pushing through changes fairly well
-  without it, but there is hope.
-</Notes>
-</Slide>
-<Slide>
-    <Heading size={6} textColor="secondary" caps>But wait there&apos;s more</Heading>
+`}</CodePane>
+      <Notes>
+        One of the biggest complaints about JavaScript is its lack of a standard library. Luckily there is a proposal to add a mechansism for
+        adding new libraries and methods to the JavaScript standard library without colliding with existing methods and objects. I personally
+        don&apos;t have a lot of hope for this one getting through, since the standards committee has been pushing through changes fairly well
+        without it, but there is hope.
+      </Notes>
+    </Slide>
+    <Slide>
+      <Heading size={6} textColor="secondary" caps>But wait there&apos;s more</Heading>
       <OrderedList>
         <ListItem>Regexp changes</ListItem>
         <ListItem>Top Level await</ListItem>
         <ListItem>Atomics.waitAsync</ListItem>
-  <ListItem>Import Assertions</ListItem>
+        <ListItem>Import Assertions</ListItem>
         <ListItem>Realms</ListItem>
         <ListItem>=&gt;* Generator arrow functions</ListItem>
         <ListItem>Promise.try</ListItem>
         <ListItem>Error stacks</ListItem>
-  <ListItem>Function.sent</ListItem>
+        <ListItem>Function.sent</ListItem>
       </OrderedList>
       <Notes>
           I wish we had time to talk through 100% of all the proposals that are in flight right now, but realistically we just can&apos;t

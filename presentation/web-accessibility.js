@@ -15,6 +15,7 @@ import {
 } from "spectacle";
 
 import "normalize.css";
+import theme from '../themes/default';
 
 import buttonsAndLinks from "../code-examples/buttons-and-links.example";
 import divsDonts from "../code-examples/divs-donts.example";
@@ -25,13 +26,6 @@ import tabindex from "../code-examples/tabindex.example";
 import labels from "../code-examples/labels.example";
 import alttext from "../code-examples/alttext.example";
 import ariaLabel from "../code-examples/aria-label.example";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
 
 import accessibilityTree from "../assets/accessibility-tree.png";
 import axePluginOutput from "../assets/axe-plugin-output.png";

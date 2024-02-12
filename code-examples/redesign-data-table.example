@@ -1,0 +1,15 @@
+<template>
+    <ApiDataProvider endpoint="/foo" namespace="namespace">
+        <div class="row">
+            <CSVDownloadButton namespace="namespace" />
+        </div>
+        <DataTable namespace="namespace" />
+        <div class="row">
+            <Paginator namespace="namespace" options={[10, 25, 50, 75, 100]} />
+        </div>
+    </ApiDataProvider>
+</template>
+
+<script setup>
+const namespace = "example-namespace"
+</script>

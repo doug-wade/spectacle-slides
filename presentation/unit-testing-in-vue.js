@@ -32,14 +32,9 @@ import spyOnApiService from "../code-examples/spy-on-api-service.example";
 import stubs from "../code-examples/stubs.example";
 import vueInternals from "../code-examples/vue-internals.example";
 
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif'
-  }
-};
-
 import "normalize.css";
+
+import theme from '../themes/default';
 
 const template = () => (
   <FlexBox

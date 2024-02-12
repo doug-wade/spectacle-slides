@@ -15,6 +15,7 @@ import {
 import butWhy from "../assets/but-why.gif";
 
 import "normalize.css";
+import theme from '../themes/skilljar';
 
 import npmWorkspacesSymlinks from "../assets/npm-workspaces-symlinks.png";
 import dag from "../assets/skilljar-dag.drawio.png";
@@ -24,13 +25,6 @@ import fullTurbo from "../assets/full-turbo.png";
 
 import workspacesPackageJson from "../code-examples/workspaces-package-json.example";
 import turboJson from "../code-examples/turbo-json.example";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
 
 const Presentation = () => (
   <Deck theme={theme}>

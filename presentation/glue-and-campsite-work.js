@@ -14,6 +14,8 @@ import {
 
 import "normalize.css";
 
+import theme from "../themes/default";
+
 import supportingRun from "../assets/supporting-run.png";
 import glueWork from "../assets/glue-work.png";
 import problemContinuum from "../assets/problem-continuum.png";
@@ -22,13 +24,6 @@ import sweeper from "../assets/5-3-2-sweeper-formation.gif";
 import wingers from "../assets/4-3-3-formation.png";
 import pieCharts from "../assets/pie-charts.png";
 import tent from "../assets/tent.jpg";
-
-const theme = {
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
 
 const Presentation = () => (
   <Deck theme={theme}>

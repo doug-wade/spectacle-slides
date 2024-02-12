@@ -29,19 +29,7 @@ import dntTypeCheckFailure from "../code-examples/dnt-build-type-check-failure.e
 import dntPublishAction from "../code-examples/dnt-publish-action.example";
 
 import "normalize.css";
-
-const theme = {
-  colors: {
-    primary: '#f4f1de',
-    secondary: '#e07a5f',
-    tertiary: '#3d405b',
-    quaternary: '#c5e478',
-  },
-  fonts: {
-    header: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-    text: '"Open Sans Condensed", Helvetica, Arial, sans-serif',
-  },
-};
+import theme from "../themes/electrique";
 
 const Presentation = () => (
 <Deck theme={theme}>
