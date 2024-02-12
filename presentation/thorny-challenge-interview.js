@@ -24,6 +24,8 @@ import dataFrame from "../assets/data-frame.png";
 import spectrumWordmark from "../assets/spectrumai-wordmark.png";
 
 import initialDataTableExample from "../code-examples/initial-data-table.example";
+import provideInject from "../code-examples/provide-inject.example";
+import redesignDataTableExample from "../code-examples/initial-data-table.example";
 
 const template = () => (
   <FlexBox
@@ -83,74 +85,84 @@ const Presentation = () => (
     <Slide>
       <Heading>Professional Background</Heading>
       <UnorderedList>
-        <ListItem>Epic Systems</ListItem>
-        <ListItem>Amazon</ListItem>
-        <ListItem>Redfin</ListItem>
-        <ListItem>Indeed</ListItem>
-        <ListItem>Possible Finance</ListItem>
         <ListItem>Skilljar</ListItem>
+        <ListItem>Indeed</ListItem>
+        <ListItem>Redfin</ListItem>
+        <ListItem>Amazon</ListItem>
+        <ListItem>Epic Systems</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Epic Systems</Heading>
       <UnorderedList>
         <ListItem>Industry: Electronic Health Record</ListItem>
-        <ListItem>Tech: C#, SQL, MUMPS</ListItem>
+        <ListItem>Projects: ETL, Product dashboard</ListItem>
         <ListItem>Focus: data warehousing</ListItem>
+        <ListItem>Tech: C#, SQL, MUMPS</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Amazon</Heading>
       <UnorderedList>
         <ListItem>Industry: Consumer Goods</ListItem>
-        <ListItem>Tech: Java, Ruby, Rails, Angular, React</ListItem>
+        <ListItem>Projects: New website, Sign up in India</ListItem>
         <ListItem>Focus: Automated failure handling and recovery</ListItem>
+        <ListItem>Tech: Java, Ruby, Rails, Angular, React</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Redfin</Heading>
       <UnorderedList>
         <ListItem>Industry: Real Estate</ListItem>
-        <ListItem>Tech: Javascript, Python, React, Java</ListItem>
+        <ListItem>Projects: React Server, Lerna</ListItem>
         <ListItem>Focus: Backend platform and build</ListItem>
+        <ListItem>Tech: Javascript, Python, React, Java</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Indeed</Heading>
       <UnorderedList>
         <ListItem>Industry: Jobs</ListItem>
-        <ListItem>Tech: Java, Javascript, Node.js, React, Koa</ListItem>
+        <ListItem>Projects: Hardening Node.js, Resume Preview</ListItem>
         <ListItem>Focus: Resumes and infrastructure</ListItem>
+        <ListItem>Tech: Java, Javascript, Node.js, React, Koa</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Possible Finance</Heading>
       <UnorderedList>
         <ListItem>Industry: FinTech</ListItem>
+        <ListItem>Projects: Compiling for the web, Design system</ListItem>
+        <ListItem>Focus: Feature development</ListItem>
         <ListItem>Tech: Javascript, Node.js, React Native</ListItem>
-        <ListItem>Focus: Compiling for the web</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Skilljar</Heading>
       <UnorderedList>
         <ListItem>Industry: Customer education</ListItem>
-        <ListItem>Tech: Python, Javascript, Vue, Web Components</ListItem>
+        <ListItem>Projects: Page Builder, Api Rate Limiting</ListItem>
         <ListItem>Focus: Frontend platform and design systems</ListItem>
+        <ListItem>Tech: Python, Javascript, Vue, Web Components</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Background</Heading>
       <UnorderedList>
-        <ListItem>What is a data frame?</ListItem>
-        <ListItem>Why do we need data frames?</ListItem>
-        <ListItem>What was the problem with data frames?</ListItem>
+        <ListItem>Needed to support a feature team
+          <UnorderedList>
+            <ListItem>For a Custom Report project</ListItem>
+            <ListItem>I was Frontend Lead</ListItem>
+          </UnorderedList>
+        </ListItem>
+        <ListItem>My team had to write new frontend components</ListItem>
+        <ListItem color={"yellow"}>Had to rewrite data frame</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>What is a data frame?</Heading>
       <FlexBox alignItems="center" justifyContent="center">
-        <Image src={dataFrame} width="75%" />
+        <Image src={dataFrame} width="65%" />
       </FlexBox>
     </Slide>
     <Slide>
@@ -162,33 +174,20 @@ const Presentation = () => (
       </UnorderedList>
     </Slide>
     <Slide>
-      <Heading>Why did we need data frames?</Heading>
-      <UnorderedList>
-        <ListItem>Display tabular information</ListItem>
-        <ListItem>Visually consistent</ListItem>
-        <ListItem>Reusable</ListItem>
-        <ListItem>Over 200 on the admin dashboard</ListItem>
-      </UnorderedList>
-    </Slide>
-    <Slide>
-      <Heading>What was the problem?</Heading>
+      <Heading>Why did we need a rewrite?</Heading>
       <UnorderedList>
         <ListItem>State cannot be synchronized with charts</ListItem>
-        <ListItem>Controls must be nested inside the data frame</ListItem>
-        <ListItem>Lack of Separation of Concerns between client and server</ListItem>
-        <ListItem>Child components access parent component internal state</ListItem>
-        <ListItem>Lack of institutional knowledge</ListItem>
-        <ListItem>Files are many thousands of lines</ListItem>
+        <ListItem>Lack of Separation of Concerns</ListItem>
+        <ListItem>Hard to understand</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
-      <Heading>What happened?</Heading>
+      <Heading>My approach</Heading>
       <OrderedList>
         <ListItem>Write spike code</ListItem>
         <ListItem>Write a slide deck and design doc</ListItem>
         <ListItem>Present a Lunch and Learn</ListItem>
         <ListItem>Do a design review</ListItem>
-        <ListItem>Implementation?</ListItem>
       </OrderedList>
     </Slide>
     <Slide>
@@ -208,27 +207,38 @@ const Presentation = () => (
       </CodePane>
     </Slide>
     <Slide>
-      <Heading>What happened?</Heading>
+      <Heading>My approach</Heading>
       <OrderedList>
-        <ListItem>Initial design reaches consensus</ListItem>
+        <ListItem>Write spike code</ListItem>
+        <ListItem>Write a slide deck and design doc</ListItem>
+        <ListItem>Present a Lunch and Learn</ListItem>
+        <ListItem>Do a design review</ListItem>
+        <ListItem color={"yellow"}>Consensus reached</ListItem>
+      </OrderedList>
+    </Slide>
+    <Slide>
+      <Heading>Challenges Begin</Heading>
+      <OrderedList>
         <ListItem>Project kickoff is delayed many months</ListItem>
         <ListItem>Implementation begins</ListItem>
         <ListItem>New requirements discovered</ListItem>
-        <ListItem>Redesign</ListItem>
-        <ListItem>Implementation</ListItem>
+        <ListItem color={"yellow"}>Redesign required</ListItem>
       </OrderedList>
     </Slide>
     <Slide>
       <Heading>Rejected Design</Heading>
       <Text>
-        We discovered new requirements around dynamically updating columns.
-        The feature needed to be redesigned to accommodate this new requirement.
+        We discovered new requirements around dynamically updating columns and 
+        controls in flyouts.
+      </Text>
+      <Text> 
+        The feature needed to be redesigned to accommodate these new requirements.
       </Text>
     </Slide>
     <Slide>
-      <Heading>What made this thorny?</Heading>
+      <Heading>What made this challenging?</Heading>
       <UnorderedList>
-        <ListItem>Project delayed</ListItem>
+        <ListItem>Missed launch for customer conference</ListItem>
         <ListItem>Complicated technical problems</ListItem>
         <ListItem>Hurt inter-team relations</ListItem>
       </UnorderedList>
@@ -265,14 +275,25 @@ const Presentation = () => (
       <CodePane 
         language="javascript" 
         highlightRanges={[[1, 11], [13, 15], [2, 2], [3, 5], [6, 6],[7, 9]]}>
-          {initialDataTableExample}
+          {redesignDataTableExample}
+      </CodePane>
+    </Slide>
+    <Slide>
+      <Heading>Redesign</Heading>
+      <CodePane 
+        language="javascript" 
+        highlightRanges={[[2, 2], [4, 4], [6, 9], [6, 10], [14, 14], [16, 19]]}>
+        {provideInject}
       </CodePane>
     </Slide>
     <Slide>
       <Heading>Ship early and often</Heading>
       <Text>
         Ship code that is pre-MVP to get feedback from feature teams 
-        as early as possible. Do integrations on hidden pages and in storybook 
+        as early as possible.
+      </Text>
+      <Text>
+        Do integrations on hidden pages and in storybook 
         so customers are not affected.
       </Text>
     </Slide>
@@ -288,7 +309,10 @@ const Presentation = () => (
       <Heading>Write copious documentation</Heading>
       <Text>
         Produce design documents, api documentation, storybook stories, and code 
-        samples. Provide documentation both in programming languages and human 
+        samples.
+      </Text>
+      <Text> 
+        Provide documentation both in programming languages and human 
         languages for clarity.
       </Text>
     </Slide>
@@ -296,8 +320,10 @@ const Presentation = () => (
       <Heading>Pair/mob programming</Heading>
       <Text>
         Pair or mob program with feature teams to understand their needs and 
-        to help them understand how to use the new data frame. Pair even when
-        I think its not strictly related to our integration.
+        to help them understand how to use the new data frame. 
+      </Text>
+      <Text>
+        Pair even when I think its not strictly related to our integration.
       </Text>
     </Slide>
     <Slide>
@@ -306,6 +332,14 @@ const Presentation = () => (
         <ListItem>Custom Reports launched 1/9/24</ListItem>
         <ListItem>Feature teams are using the new data frame</ListItem>
         <ListItem>Legacy data frames are being migrated</ListItem>
+      </UnorderedList>
+    </Slide>
+    <Slide>
+      <Heading>Next time</Heading>
+      <UnorderedList>
+        <ListItem>Designs also experience &quot;code rot&quot;</ListItem>
+        <ListItem>Conduct constant check-ins</ListItem>
+        <ListItem>People over process</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
