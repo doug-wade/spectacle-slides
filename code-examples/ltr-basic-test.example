@@ -1,0 +1,15 @@
+import {render, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import Greeter from './greeter'
+
+test('displays a greeting', async () => {
+  // Arrange
+  const name = "World"
+  render(<Greeter name={name} />)
+
+  // Act
+  await screen.findByRole('heading')
+
+  // Assert
+  expect(screen.getByRole('heading')).toHaveTextContent(`Hello ${name}`)
+})

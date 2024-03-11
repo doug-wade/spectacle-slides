@@ -1,0 +1,11 @@
+screen.getByRole('spinbutton', {value: {now: 5}})
+// <button>Volume</button>
+
+screen.getAllByRole('spinbutton', {value: {min: 0}})
+// [
+//   <button>Volume</button>,
+//   <button>Pitch</button>
+// ]
+
+screen.queryByRole('spinbutton', {value: {now: 5}})
+// null
