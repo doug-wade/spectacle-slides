@@ -1,10 +1,9 @@
-Vue.component('lesson-title', {
-  props: ['title'],
-  template: '<span>{{ title }}</span>'
-})
+const myComponent = () => (
+  <div>Hello World!</div>
+)
 
 function lessonTitle(title) {
-  return document.createElement('span').setAttribute('text', title);
+  return document.createElement('span').setAttribute('text', title)
 }
 
 const fib = (n) => {

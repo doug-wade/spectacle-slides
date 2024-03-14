@@ -1,0 +1,19 @@
+import {render, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import Greeter from './greeter'
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: (str: string) => 'Привіт' })
+}))
+
+test('displays a greeting', async () => {
+  // Arrange
+  const name = "Світ"
+  render(<Greeter language="ukr" name={name} />)
+
+  // Act
+  await screen.findByRole('heading')
+
+  // Assert
+  expect(screen.getByRole('heading')).toHaveTextContent(`Привіт ${name}`)
+})

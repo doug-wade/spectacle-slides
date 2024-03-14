@@ -1,0 +1,10 @@
+test('type into an input field', async () => {
+  const user = userEvent.setup()
+
+  render(<input defaultValue="Hello," />)
+  const input = screen.getByRole('textbox')
+
+  await user.type(input, ' World!')
+
+  expect(input).toHaveValue('Hello, World!')
+})

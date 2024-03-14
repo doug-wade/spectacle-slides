@@ -1,0 +1,13 @@
+// Queries Accessible to Everyone
+screen.getByRole('button', { hidden: true })
+screen.getByLabelText('Username')
+screen.getByPlaceholderText('Username')
+screen.getByText(/about/i)
+screen.getByDisplayValue('Alaska')
+
+// Semantic Queries
+screen.getByAltText(/incredibles.*? poster/i)
+screen.getByTitle('Delete')
+
+// Test IDs
+screen.getByTestId('custom-element')

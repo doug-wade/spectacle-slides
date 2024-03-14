@@ -1,0 +1,37 @@
+pointer(input: PointerActionInput | Array<PointerActionInput>): Promise<void>
+pointer([
+  // touch the screen at element1
+  {keys: '[TouchA>]', target: element1},
+  // move the touch pointer to element2
+  {pointerName: 'TouchA', target: element2},
+  // release the touch pointer at the last position (element2)
+  {keys: '[/TouchA]'},
+])
+
+keyboard(input: KeyboardInput): Promise<void>
+keyboard('{Shift>}A{/Shift}')
+
+clear(element: Element): Promise<void>
+clear(screen.queryByRole('spinbutton'))
+
+selectOptions(
+  element: Element,
+  values: HTMLElement | HTMLElement[] | string[] | string,
+): Promise<void>
+deselectOptions(
+  element: Element,
+  values: HTMLElement | HTMLElement[] | string[] | string,
+): Promise<void>
+selectOptions(screen.getByRole('listbox'), ['1', 'C'])
+
+upload(
+  element: HTMLElement,
+  fileOrFiles: File | File[],
+): Promise<void>
+upload(screen.getByLabelText(/upload file/i), new File())
+
+hover(element: Element): Promise<void>
+hover(screen.getByRole('button'))
+
+unhover(element: Element): Promise<void>
+unhover(screen.getByRole('button'))

@@ -1,0 +1,12 @@
+describe('my fake timers', () => {
+    beforeEach(() => {
+        jest.useFakeTimers()
+    })
+
+    it('runs setTimeout', ...)
+
+    afterEach(() => {
+        jest.runOnlyPendingTimers()
+        jest.useRealTimers()
+    })
+})
