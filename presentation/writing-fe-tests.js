@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   Box,
   CodePane,
+  CodeSpan,
   Deck,
   FlexBox,
   Heading,
@@ -27,6 +28,7 @@ import fibFinal from "../code-examples/fib-final.example";
 import fibrMock from "../code-examples/fibr-mock.example";
 import initialFib from "../code-examples/initial-fib.example";
 import mockTest from '../code-examples/ltr-mock-test.example';
+import namingAndHierarchy from '../code-examples/storybook-naming-hierarchy.example';
 import screenQueryTypes from '../code-examples/ltr-screen-query-types.example';
 import screenQueries from '../code-examples/ltr-screen-queries.example';
 import spiesTest from '../code-examples/ltr-spies-test.example';
@@ -42,7 +44,26 @@ const Presentation = () => (
       <Heading fontSize="h2" color="primary">
         With @testing-library/react and storybook
       </Heading>
-    </Slide> 
+    </Slide>
+    <Slide>
+      <Heading>Agenda</Heading>
+      <UnorderedList>
+        <ListItem>Unit and visual testing</ListItem>
+        <ListItem>Unit testing theory</ListItem>
+        <ListItem>Unit testing with @testing-library/react</ListItem>
+        <ListItem>Visual testing with storybook</ListItem>
+      </UnorderedList>
+    </Slide>
+    <Slide>
+      <Heading fit caps>
+        Unit testing and visual testing
+      </Heading>
+      <UnorderedList>
+        <ListItem>Help guarantee correctness</ListItem>
+        <ListItem>Faster to write</ListItem>
+        <ListItem>Mimics actual user behavior</ListItem>
+      </UnorderedList>
+    </Slide>
     <Slide>
       <Heading fit caps>
         Unit testing vs visual testing
@@ -52,14 +73,14 @@ const Presentation = () => (
           <Heading fontSize="h3">Unit tests</Heading>
           <UnorderedList>
             <ListItem>Run on every build</ListItem>
-            <ListItem>Faster to write</ListItem>
+            <ListItem>Behavior only</ListItem>
           </UnorderedList>
         </Box>
         <Box>
           <Heading fontSize="h3">Visual tests</Heading>
           <UnorderedList>
-            <ListItem>Allow testing without changing the product</ListItem>
-            <ListItem>Include appearance</ListItem>
+            <ListItem>Run on-demand</ListItem>
+            <ListItem>Includes appearance</ListItem>
           </UnorderedList>
         </Box>
       </FlexBox>
@@ -76,10 +97,10 @@ const Presentation = () => (
     </Slide>
     <Slide>
         <Heading>Components as pure functions</Heading>
-        <CodePane language="typescript" highlightRanges={[[1, 4], [6, 8], [10, 15]]}>{componentsAsFunctions}</CodePane>
+        <CodePane language="typescript" highlightRanges={[[1, 4], [5, 7], [9, 14]]}>{componentsAsFunctions}</CodePane>
         <Notes>
             I&apos;m going to get started with something really simple and NOT a component so we can think about unit testing
-            independent of Vue; then we&apos;ll add the particulars of the framework. Note that all three examples are the
+            independent of React; then we&apos;ll add the particulars of the framework. Note that all three examples are the
             same for the purpose of unit testing -- they are a pure function that takes some input and returns some output.
         </Notes>
     </Slide>
@@ -144,7 +165,15 @@ const Presentation = () => (
     </Slide>
     <Slide>
       <Heading>Mocks</Heading>
-      <CodePane language="typescript" highlightRanges={[[5, 7], [17, 18]]}>{mockTest}</CodePane>
+      <CodePane language="typescript" highlightRanges={[[5, 7], [11, 12], [17, 18]]}>{mockTest}</CodePane>
+    </Slide>
+    <Slide>
+      <Heading>Mocks: What to mock?</Heading>
+      <UnorderedList>
+        <ListItem>Unit tests should mock every import</ListItem>
+        <ListItem>Integration tests only mock side-effects</ListItem>
+        <ListItem>Both approaches have merits and drawbacks</ListItem>
+      </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Spies</Heading>
@@ -152,26 +181,41 @@ const Presentation = () => (
     </Slide>
     <Slide>
       <Heading>Faking Timers</Heading>
-      <Text>When your code uses timers (`setTimeout`, `setInterval`, `clearTimeout`, `clearInterval`), use fake timers</Text>
-      <CodePane language="typescript" highlightRanges={[[2, 4], [6, 9]]}>{fakeTimers}</CodePane>
+      <Text>When your code uses timers (<CodeSpan>setTimeout</CodeSpan>, <CodeSpan>setInterval</CodeSpan>, <CodeSpan>clearTimeout</CodeSpan>, <CodeSpan>clearInterval</CodeSpan>), use fake timers</Text>
+      <CodePane language="typescript" highlightRanges={[[6, 6], [2, 4], [8, 11]]}>{fakeTimers}</CodePane>
+    </Slide>
+    <Slide>
+      <Heading>Running the unit tests</Heading>
+      <CodePane language="shell">
+        yarn test --coverage
+      </CodePane>
     </Slide>
     <Slide>
       <Heading fit caps>
         Why visual testing?
       </Heading>
       <UnorderedList>
-          <ListItem>Safety when making changes</ListItem>
-          <ListItem>Form of documentation</ListItem>
-          <ListItem>Ship smaller changesets</ListItem>
+        <ListItem>Safety when making changes</ListItem>
+        <ListItem>Form of documentation</ListItem>
+        <ListItem>Ship smaller changesets</ListItem>
       </UnorderedList>
     </Slide>
     <Slide>
       <Heading>Writing a story</Heading>
-      <CodePane language="typescript" highlightRanges={[[1,2], [4,6], [8,8], [10, 10], [12, 14], [16, 18]]}>{writingAStory}</CodePane>
+      <CodePane language="typescript" highlightRanges={[[1, 2], [4, 6], [8, 8], [10, 10], [12, 14], [16, 18]]}>{writingAStory}</CodePane>
     </Slide>
     <Slide>
       <Heading>Using args</Heading>
       <CodePane language="typescript" highlightRanges={[[7, 10], [16, 20]]}>{usingArgs}</CodePane>
+    </Slide>
+    <Slide>
+      <Heading>Naming and hierarchy</Heading>
+      <CodePane language="typescript" highlightRanges={[[3, 3], [6, 6], [13, 13]]}>{namingAndHierarchy}</CodePane>
+    </Slide>
+    <Slide>
+      <Heading>Mocking</Heading>
+      <Text>We will want to mock network requests, but are yet to set up the infrastructure.</Text>
+      <Text>Reach out if you need this and we can coordinate.</Text>
     </Slide>
     <Slide>
       <Heading>Viewing storybook</Heading>

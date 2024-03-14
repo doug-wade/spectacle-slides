@@ -3,6 +3,8 @@ describe('my fake timers', () => {
         jest.useFakeTimers()
     })
 
+    it('runs setTimeout', ...)
+
     afterEach(() => {
         jest.runOnlyPendingTimers()
         jest.useRealTimers()

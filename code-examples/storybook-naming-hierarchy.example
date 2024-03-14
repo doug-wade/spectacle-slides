@@ -1,0 +1,13 @@
+import type { Meta, StoryObj } from '@storybook/react'
+
+import { DurationInput as DurationInputComponent } from './common/forms/DurationInput'
+
+const meta: Meta<typeof DurationInputComponent> = {
+  title: 'common/forms/DurationInput',
+  component: DurationInputComponent,
+}
+
+export default meta
+type Story = StoryObj<typeof DurationInputComponent>
+
+export const DurationInput: Story = {}
